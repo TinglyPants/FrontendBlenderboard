@@ -9,7 +9,7 @@ export default function Profile({ username, email, image }) {
                     {email}
                 </p>
             </div>
-            <div className="rounded-full overflow-hidden aspect-square flex flex-col items-center bg-black">
+            <div className="rounded-full overflow-hidden aspect-square flex flex-col items-center bg-black shrink-0 mr-[1.5rem]">
                 <img alt="User Profile" src={image} className="h-full" />
             </div>
         </div>

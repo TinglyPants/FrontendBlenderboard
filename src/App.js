@@ -6,7 +6,7 @@ import SideBar from "./Components/SideBar/SideBar";
 
 export default function App() {
     return (
-        <div className="w-screen h-screen bg-black">
+        <div className="w-screen h-screen bg-black flex flex-col">
             <NavBar>
                 <Logo />
                 <SearchBar />

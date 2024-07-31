@@ -1,0 +1,20 @@
+I cannot set the sidebar height to fill the remaining viewport space without overflowing.
+Figure1 = code in SideBar.js
+Figure2 = code in App.js
+Figure3 = site (test colours used) - notice the scrollbar.
+
+Solution attempt 1: make the entire wrapping div flex-col, then set height to full
+Figure4 = code (App.js)
+Figure5 = site
+
+This has worked, but the scaling for the navbar has gone all wonky. Ignore the white search bar ill solve that later as its an easy fix.
+
+Fixing: Changing code in Logo.js to fix (shrink-0)
+Figure6 = before
+Figure7 = after
+
+Fixing: Changing code in Profile.js to fix (shrink-0 mr-[1.5rem])
+Figure8 = before
+Figure9 = after
+
+All fixed :3
