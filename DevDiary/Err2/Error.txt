@@ -1,0 +1,7 @@
+Overflowing text makes styling look weird
+Figure1 = code
+Figure2 = weird styling
+
+Solution: Change text overflow rules
+Figure3 = code after
+Figure4 = site after

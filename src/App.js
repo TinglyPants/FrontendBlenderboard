@@ -11,7 +11,9 @@ export default function App() {
                 <SearchBar />
                 <Profile
                     username={"Cat#302241"}
-                    email={"Cat#302241@catmail.com"}
+                    email={
+                        "EXAMPLE-TEXT EXAMPLE-TEXT EXAMPLE-TEXT EXAMPLE-TEXT EXAMPLE-TEXT EXAMPLE-TEXT"
+                    }
                     image={
                         "https://images.pexels.com/photos/1314550/pexels-photo-1314550.jpeg?auto=compress&cs=tinysrgb&w=600"
                     }
