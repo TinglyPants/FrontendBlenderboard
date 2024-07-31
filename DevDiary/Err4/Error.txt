@@ -1,0 +1,13 @@
+The search bar appears to have a white rectangle in???
+Figure1 = code
+Figure2 = site
+
+Solution: changing the css in the input area
+Figure3 = code after
+Figure4 = site after
+
+Sub problem: text is a little small.
+Figure5 = code after
+Figure6 = site after
+
+lovely!

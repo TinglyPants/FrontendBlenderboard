@@ -6,7 +6,10 @@ export default function SearchBar() {
         <div className="w-full h-full flex items-center">
             <div className="bg-lightest w-full h-[3rem] rounded-full flex items-center px-[0.25rem]">
                 <SVGIcon path={SearchIcon} name="Search" />
-                <input type="text" className="text-white w-full mr-[1rem]" />
+                <input
+                    type="text"
+                    className="text-white w-full mr-[1rem] bg-lightest focus:outline-none text-[1.1rem]"
+                />
             </div>
         </div>
     );
