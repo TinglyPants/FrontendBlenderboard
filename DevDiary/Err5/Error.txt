@@ -1,0 +1,9 @@
+I cannot easily change the size of my SVG icons.
+Figure1 = SVG code
+
+Solution: props
+Figure2 = code after
+
+Interesting note: I cannot do `w-${size} h-${size}` because of how tailwind preprocesses the classes for optimising. 
+I must explicitly state "w-8 h-8" somewhere in my code for it to include that class for example, so this is the best way to handle that.
+This isnt entirely clear so I have included a comment.
