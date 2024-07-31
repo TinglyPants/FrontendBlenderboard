@@ -2,6 +2,7 @@ import Logo from "./Components/NavBar/Logo";
 import NavBar from "./Components/NavBar/NavBar";
 import Profile from "./Components/NavBar/Profile";
 import SearchBar from "./Components/NavBar/SearchBar";
+import SideBar from "./Components/SideBar/SideBar";
 
 export default function App() {
     return (
@@ -19,6 +20,10 @@ export default function App() {
                     }
                 />
             </NavBar>
+            {/* flex div for sidebar and main content. */}
+            <div className="w-full h-full">
+                <SideBar>A</SideBar>
+            </div>
         </div>
     );
 }
