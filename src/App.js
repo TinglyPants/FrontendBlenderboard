@@ -3,6 +3,8 @@ import NavBar from "./Components/NavBar/NavBar";
 import Profile from "./Components/NavBar/Profile";
 import SearchBar from "./Components/NavBar/SearchBar";
 import SideBar from "./Components/SideBar/SideBar";
+import SideBarItem from "./Components/SideBar/SideBarItem";
+import { HomeIcon } from "./Components/General/SVGIcon/icons";
 
 export default function App() {
     return (
@@ -22,7 +24,11 @@ export default function App() {
             </NavBar>
             {/* flex div for sidebar and main content. */}
             <div className="w-full h-full">
-                <SideBar>A</SideBar>
+                <SideBar>
+                    <SideBarItem path={HomeIcon} text={"Home"} />
+                    <SideBarItem path={""} text={"Search"} />
+                    <SideBarItem path={""} text={"Account"} />
+                </SideBar>
             </div>
         </div>
     );
