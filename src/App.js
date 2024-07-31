@@ -4,7 +4,11 @@ import Profile from "./Components/NavBar/Profile";
 import SearchBar from "./Components/NavBar/SearchBar";
 import SideBar from "./Components/SideBar/SideBar";
 import SideBarItem from "./Components/SideBar/SideBarItem";
-import { HomeIcon } from "./Components/General/SVGIcon/icons";
+import {
+    HomeIcon,
+    ProfileIcon,
+    SearchIcon,
+} from "./Components/General/SVGIcon/icons";
 
 export default function App() {
     return (
@@ -26,8 +30,8 @@ export default function App() {
             <div className="w-full h-full">
                 <SideBar>
                     <SideBarItem path={HomeIcon} text={"Home"} />
-                    <SideBarItem path={""} text={"Search"} />
-                    <SideBarItem path={""} text={"Account"} />
+                    <SideBarItem path={SearchIcon} text={"Search"} />
+                    <SideBarItem path={ProfileIcon} text={"Account"} />
                 </SideBar>
             </div>
         </div>
