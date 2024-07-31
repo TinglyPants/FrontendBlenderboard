@@ -1,0 +1,15 @@
+Logo in navbar is not centered properly.
+Figure1 = code
+Figure2 = site (diagnostic tools enabled)
+
+Solution: use flexbox
+Figure3 = code afterwards
+Figure4 = site afterwards
+
+This has centered it somewhat, but its too close to the left.
+
+Solution: Margins
+Figure5 = code afterwards
+Figure6 = site afterwards
+
+Perfect!
