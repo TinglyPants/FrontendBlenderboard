@@ -9,6 +9,7 @@ import {
     ProfileIcon,
     SearchIcon,
 } from "./Components/General/SVGIcon/icons";
+import MainContent from "./Components/MainContent/MainContent";
 
 export default function App() {
     return (
@@ -27,12 +28,13 @@ export default function App() {
                 />
             </NavBar>
             {/* flex div for sidebar and main content. */}
-            <div className="w-full h-full">
+            <div className="w-full h-full flex">
                 <SideBar>
                     <SideBarItem path={HomeIcon} text={"Home"} />
                     <SideBarItem path={SearchIcon} text={"Search"} />
                     <SideBarItem path={ProfileIcon} text={"Account"} />
                 </SideBar>
+                <MainContent>Hello</MainContent>
             </div>
         </div>
     );
