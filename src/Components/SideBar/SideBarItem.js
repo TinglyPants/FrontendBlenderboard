@@ -1,8 +1,18 @@
+import { useNavigate } from "react-router-dom";
 import SVGIcon from "../General/SVGIcon/SVGIcon";
 
 export default function SideBarItem({ SVGpath, text, path }) {
+    const navigate = useNavigate();
+
+    const handleRedirect = () => {
+        navigate(path);
+    };
+
     return (
-        <div className="flex h-[4rem] mx-[1rem] mt-[0.5rem] items-center pl-[4rem] cursor-pointer group">
+        <div
+            className="flex h-[4rem] mx-[1rem] mt-[0.5rem] items-center pl-[4rem] cursor-pointer group"
+            onClick={handleRedirect}
+        >
             <SVGIcon
                 path={SVGpath}
                 name={text}
