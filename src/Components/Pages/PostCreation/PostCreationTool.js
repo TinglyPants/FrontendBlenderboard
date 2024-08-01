@@ -7,7 +7,20 @@ export default function PostCreationTool() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Submit logic here
+        // guard clauses to prevent invalid post
+        if (postCreationData.title === "") {
+            console.log("You need to include a title!");
+            return;
+        }
+        if (postCreationData.description === "") {
+            console.log("You need to include a description!");
+            return;
+        }
+        if (postCreationData.images.length === 0) {
+            console.log("You need to include at least one image!");
+            return;
+        }
+
         console.log(postCreationData);
     };
 
