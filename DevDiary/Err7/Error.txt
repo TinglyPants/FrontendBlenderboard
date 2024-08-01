@@ -1,0 +1,16 @@
+For some reason, my post creation data context is not being updated when i think it should be.
+
+Figure1 = code (post creation tool)
+Figure2 = console logs
+
+solution attempt one: using the functional form of useState updates
+using a function will queue the useState updates so that sequential operations happen in proper order
+
+Figure3 = code after
+Figure4 = results
+
+This didnt work.
+
+Solution attempt two: changing the order of operations
+Figure5 = code after
+Figure6 = results -> success!

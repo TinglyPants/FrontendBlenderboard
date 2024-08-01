@@ -15,5 +15,7 @@ A more elegant way to handle this is the context API. This works with state to e
 falling victim to what is known as 'prop drilling'.
 
 Figure1 = PostCreation page before
+
+// forgot to add, look at github for these..
 Figure2 = PostCreation page after
 Figure3 = PostCreationTool code after

@@ -12,8 +12,7 @@ export default function PostCreationTool() {
     };
 
     const handleTitleChange = (e) => {
-        console.log("Title input changed to: " + e.target.value);
-        setPostCreationData({ title: e.target.value, ...postCreationData });
+        setPostCreationData({ ...postCreationData, title: e.target.value });
     };
     // to be added
     // const handleDescriptionChange = (e) => {};
