@@ -11,7 +11,8 @@ import {
 } from "./Components/General/SVGIcon/icons";
 import MainContent from "./Components/MainContent/MainContent";
 import { Route, Routes } from "react-router-dom";
-import { HomePath } from "./Components/Pages/paths";
+import { CreatePath, HomePath } from "./Components/Pages/paths";
+import PostCreation from "./Components/Pages/PostCreation/PostCreation";
 
 export default function App() {
     return (
@@ -43,6 +44,7 @@ export default function App() {
                 <MainContent>
                     <Routes>
                         <Route path={HomePath} element={"HOME"} />
+                        <Route path={CreatePath} element={<PostCreation />} />
                     </Routes>
                 </MainContent>
             </div>
