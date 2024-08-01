@@ -12,13 +12,28 @@ export default function PostCreationTool() {
     };
 
     const handleTitleChange = (e) => {
+        // base state is ""
         setPostCreationData({ ...postCreationData, title: e.target.value });
     };
-    // to be added
-    // const handleDescriptionChange = (e) => {};
-    // const handleImagesChange = (e) => {};
-    // const handleVideoChange = (e) => {};
-    // const handleModelChange = (e) => {};
+    const handleDescriptionChange = (e) => {
+        // base state is ""
+        setPostCreationData({
+            ...postCreationData,
+            description: e.target.value,
+        });
+    };
+    const handleImagesChange = (e) => {
+        // base state is FileList length 0
+        setPostCreationData({ ...postCreationData, images: e.target.files });
+    };
+    const handleVideoChange = (e) => {
+        // base state is undefined
+        setPostCreationData({ ...postCreationData, video: e.target.files[0] });
+    };
+    const handleModelChange = (e) => {
+        // base state is undefined
+        setPostCreationData({ ...postCreationData, model: e.target.files[0] });
+    };
 
     return (
         <div className="w-[36rem] p-[1rem] bg-mid rounded-[1rem] text-white">
@@ -34,6 +49,7 @@ export default function PostCreationTool() {
                 <textarea
                     className="bg-black p-[0.5rem] rounded-[0.5rem]"
                     rows={6}
+                    onChange={handleDescriptionChange}
                 />
 
                 <label className="mt-[1rem] text-[1.15rem]">Add Images:</label>
@@ -41,18 +57,21 @@ export default function PostCreationTool() {
                     type="file"
                     className="bg-highlight p-[0.5rem] rounded-[0.5rem]"
                     multiple
+                    onChange={handleImagesChange}
                 ></input>
 
                 <label className="mt-[1rem] text-[1.15rem]">Add Video:</label>
                 <input
                     type="file"
                     className="bg-highlight p-[0.5rem] rounded-[0.5rem]"
+                    onChange={handleVideoChange}
                 ></input>
 
                 <label className="mt-[1rem] text-[1.15rem]">Add Model:</label>
                 <input
                     type="file"
                     className="bg-highlight p-[0.5rem] rounded-[0.5rem]"
+                    onChange={handleModelChange}
                 ></input>
 
                 <button

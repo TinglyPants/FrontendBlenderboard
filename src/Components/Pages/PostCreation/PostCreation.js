@@ -8,9 +8,9 @@ export default function PostCreation() {
     const [postCreationData, setPostCreationData] = useState({
         title: "",
         description: "",
-        images: "",
-        video: "",
-        model: "",
+        images: FileList,
+        video: undefined,
+        model: undefined,
     });
 
     return (
