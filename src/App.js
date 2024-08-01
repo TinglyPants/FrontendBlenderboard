@@ -32,9 +32,9 @@ export default function App() {
             {/* flex div for sidebar and main content. */}
             <div className="w-full h-full flex">
                 <SideBar>
-                    <SideBarItem path={HomeIcon} text={"Home"} />
-                    <SideBarItem path={SearchIcon} text={"Search"} />
-                    <SideBarItem path={ProfileIcon} text={"Account"} />
+                    <SideBarItem SVGpath={HomeIcon} text={"Home"} />
+                    <SideBarItem SVGpath={SearchIcon} text={"Search"} />
+                    <SideBarItem SVGpath={ProfileIcon} text={"Account"} />
                 </SideBar>
                 <MainContent>
                     <Routes>
