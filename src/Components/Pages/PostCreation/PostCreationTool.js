@@ -5,6 +5,22 @@ export default function PostCreationTool() {
     const [postCreationData, setPostCreationData] =
         useContext(PostCreationContext);
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        // Submit logic here
+        console.log(postCreationData);
+    };
+
+    const handleTitleChange = (e) => {
+        console.log("Title input changed to: " + e.target.value);
+        setPostCreationData({ title: e.target.value, ...postCreationData });
+    };
+    // to be added
+    // const handleDescriptionChange = (e) => {};
+    // const handleImagesChange = (e) => {};
+    // const handleVideoChange = (e) => {};
+    // const handleModelChange = (e) => {};
+
     return (
         <div className="w-[36rem] p-[1rem] bg-mid rounded-[1rem] text-white">
             <form className="flex flex-col max-h-full">
@@ -12,6 +28,7 @@ export default function PostCreationTool() {
                 <input
                     type="text"
                     className="bg-black p-[0.5rem] rounded-[0.5rem]"
+                    onChange={handleTitleChange}
                 />
 
                 <label className="mt-[1rem] text-[1.15rem]">Description:</label>
@@ -38,6 +55,13 @@ export default function PostCreationTool() {
                     type="file"
                     className="bg-highlight p-[0.5rem] rounded-[0.5rem]"
                 ></input>
+
+                <button
+                    className="w-[12rem] bg-highlight p-[0.5rem] rounded-full mt-[1.5rem] text-[1.15rem] font-semibold self-center"
+                    onClick={handleSubmit}
+                >
+                    Submit
+                </button>
             </form>
         </div>
     );
