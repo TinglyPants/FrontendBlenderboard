@@ -10,6 +10,8 @@ import {
     SearchIcon,
 } from "./Components/General/SVGIcon/icons";
 import MainContent from "./Components/MainContent/MainContent";
+import { Route, Routes } from "react-router-dom";
+import { HomePath } from "./Components/Pages/paths";
 
 export default function App() {
     return (
@@ -34,7 +36,11 @@ export default function App() {
                     <SideBarItem path={SearchIcon} text={"Search"} />
                     <SideBarItem path={ProfileIcon} text={"Account"} />
                 </SideBar>
-                <MainContent>Hello</MainContent>
+                <MainContent>
+                    <Routes>
+                        <Route path={HomePath} element={"HOME"} />
+                    </Routes>
+                </MainContent>
             </div>
         </div>
     );
