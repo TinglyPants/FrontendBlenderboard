@@ -1,4 +1,10 @@
+import { useContext } from "react";
+import { PostCreationContext } from "./PostCreation";
+
 export default function PostCreationTool() {
+    const [postCreationData, setPostCreationData] =
+        useContext(PostCreationContext);
+
     return (
         <div className="w-[36rem] p-[1rem] bg-mid rounded-[1rem] text-white">
             <form className="flex flex-col max-h-full">

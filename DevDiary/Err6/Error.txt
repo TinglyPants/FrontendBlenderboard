@@ -1,0 +1,19 @@
+The problem here is that I have no way of changing the Post Creation data from within my post creation tool. I also in the future
+want this data to be accessible from a post preview component, which is a sibling of the Post Creation Tool component. This is not
+a huge issue, as I could simply declare the state in the parent component (the post creation page) and pass it down through props.
+The problem comes when I want to use that state from within a child of the post preview component for example. I could still pass 
+the state down as another prop, but this could become ugly and hard to manage.
+
+                    PostCreationPage                                      parent
+                  /                  \
+PostCreationTool                      PostPreviewComponent                child
+                                      /               \
+                            PostPreviewImage        PostPreviewTitle      grandchild etc...
+
+
+A more elegant way to handle this is the context API. This works with state to enable children at any depth to access the same state without
+falling victim to what is known as 'prop drilling'.
+
+Figure1 = PostCreation page before
+Figure2 = PostCreation page after
+Figure3 = PostCreationTool code after
