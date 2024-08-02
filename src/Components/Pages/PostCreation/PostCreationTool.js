@@ -29,7 +29,10 @@ export default function PostCreationTool() {
             "description",
             postCreationData.description
         );
-        postCreationFormData.append("images", postCreationData.images);
+        // append individual files to FormData:
+        for (let i = 0; i < postCreationData.images.length; i++) {
+            postCreationFormData.append("images", postCreationData.images[i]);
+        }
         postCreationFormData.append("video", postCreationData.video);
         postCreationFormData.append("model", postCreationData.model);
 
