@@ -5,7 +5,7 @@ export default function PostCreationTool() {
     const [postCreationData, setPostCreationData] =
         useContext(PostCreationContext);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         // guard clauses to prevent invalid post
         if (postCreationData.title === "") {
@@ -21,7 +21,29 @@ export default function PostCreationTool() {
             return;
         }
 
-        console.log(postCreationData);
+        // Building FormData object to send to API
+        const postCreationFormData = new FormData();
+
+        postCreationFormData.append("title", postCreationData.title);
+        postCreationFormData.append(
+            "description",
+            postCreationData.description
+        );
+        postCreationFormData.append("images", postCreationData.images);
+        postCreationFormData.append("video", postCreationData.video);
+        postCreationFormData.append("model", postCreationData.model);
+
+        try {
+            const response = await fetch("http://localhost:4000/posts/create", {
+                method: "POST",
+                body: postCreationFormData,
+            });
+
+            const data = await response.json();
+            console.log(data);
+        } catch (err) {
+            console.error(err);
+        }
     };
 
     const handleTitleChange = (e) => {
