@@ -15,14 +15,30 @@ export default function Post({ id }) {
                 "http://localhost:4000/posts/read/" + id
             );
             const received = await response.json();
-            console.log(received);
             setPostData({
                 title: received.title,
                 description: received.description,
                 images: received.images,
                 video: received.video,
+                model: received.model,
             });
         })();
     }, [id]);
-    return <p className="text-white">{postData.title}</p>;
+    return (
+        <div className="bg-mid rounded-xl w-full flex flex-col mb-[2rem]">
+            <h1 className="mx-[1rem] mt-[1rem] mb-[0.25rem] text-white text-3xl font-semibold">
+                {postData.title}
+            </h1>
+            <p className="mx-[1rem] text-white text-lg font-semibold overflow-hidden text-ellipsis whitespace-nowrap">
+                {postData.description}
+            </p>
+            {/* Media component will go here later */}
+            <div
+                id="placeholder"
+                className="bg-black h-[22rem] rounded-xl m-[1rem] text-red-500"
+            >
+                PLACEHOLDER
+            </div>
+        </div>
+    );
 }
