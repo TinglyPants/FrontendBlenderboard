@@ -14,6 +14,7 @@ import { Route, Routes } from "react-router-dom";
 import { CreatePath, HomePath } from "./Components/Pages/paths";
 import PostCreation from "./Components/Pages/PostCreation/PostCreation";
 import SideBarButton from "./Components/SideBar/SideBarButton";
+import Home from "./Components/Pages/Home/Home";
 
 export default function App() {
     return (
@@ -45,7 +46,7 @@ export default function App() {
                 </SideBar>
                 <MainContent>
                     <Routes>
-                        <Route path={HomePath} element={"HOME"} />
+                        <Route path={HomePath} element={<Home />} />
                         <Route path={CreatePath} element={<PostCreation />} />
                     </Routes>
                 </MainContent>
