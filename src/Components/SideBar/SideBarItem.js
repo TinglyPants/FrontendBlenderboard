@@ -10,7 +10,7 @@ export default function SideBarItem({ SVGpath, text, path }) {
 
     return (
         <div
-            className="flex h-[4rem] mx-[1rem] mt-[0.5rem] items-center pl-[4rem] cursor-pointer group"
+            className="flex h-[4rem] mx-[1rem] mt-[0.5rem] items-center cursor-pointer group self-center"
             onClick={handleRedirect}
         >
             <SVGIcon
