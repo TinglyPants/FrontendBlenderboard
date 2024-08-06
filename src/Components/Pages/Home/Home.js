@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Post from "../../General/PostComponents/Post";
 
 export default function Home() {
     const [postIDArray, setPostIDArray] = useState([]);
@@ -15,7 +16,7 @@ export default function Home() {
     return (
         <div className="w-full h-full flex flex-col p-[1.5rem] bg-black overflow-y-scroll">
             {postIDArray.map((postID) => {
-                return <p className="text-white">{`Post ID: ${postID}`}</p>;
+                return <Post id={postID} key={postID} />;
             })}
         </div>
     );
