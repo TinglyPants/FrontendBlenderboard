@@ -1,0 +1,25 @@
+Problem: How do I make an API call as soon as the home page loads?
+Solution: useEffect
+
+Figure1 = code
+Figure2 = console
+
+Whats going on here? Well, useEffect is a strictly synchronous hook. This prevents potential race conditions, where multiple useEffect hooks cold conflict on the same page.
+to handle this, I will get useEffect to call a single async IIFE (immediately invoked function expression) that will handle everything else from there. This prevents race 
+conditions and is non-blocking too.
+
+Figure3 = code after
+Figure4 = console after
+
+This works nicely, but how do we then get this to instantiate post components on screen?
+useState is the tool for this job!
+I will initialise an empty array as a state hook, then once the API responds i will update that state. 
+This will trigger a page re-render with the new data.
+
+(I also made another post to illustrate better)
+
+Figure5 = code
+Figure6 = page
+
+Boom! that was actually very easy but illustrates the fundamentals of react nicely.
+Now i must create the post components to handle it from there.
