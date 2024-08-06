@@ -14,7 +14,7 @@ export default function PostCreation() {
     });
 
     return (
-        <div className="w-full h-full flex p-[1.5rem] bg-black overflow-y-scroll">
+        <div className="w-full h-full flex p-[1.5rem] bg-black">
             {/* Initialising post context provider */}
             <PostCreationContext.Provider
                 value={[postCreationData, setPostCreationData]}

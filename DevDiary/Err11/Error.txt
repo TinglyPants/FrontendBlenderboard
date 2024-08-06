@@ -1,0 +1,18 @@
+Scroll behaviour is not going as expected.
+
+Figure1 = App.js code
+Figure2 = Home.js code
+
+I have way too many 'container' components to manage, all with different backgrounds. For testing, im gonna strip them down as much as possible
+Figure3 = changing colours to make it all clearer
+Figure4 = everything back to basics (it looks awful)
+
+Idea designed in paint: Figure5 (Arrows indicate flex direction)
+
+Figure6 = after redone
+
+After putting that into action, it seems to have partially worked!
+Still some weird bits, so lets fix that. 
+
+Firstly is the horizontal scrolling being weird. I believe this is caused by the vertical scrollbar getting in the way.
+

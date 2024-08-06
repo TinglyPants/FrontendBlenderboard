@@ -18,7 +18,7 @@ import Home from "./Components/Pages/Home/Home";
 
 export default function App() {
     return (
-        <div className="w-screen h-screen bg-black flex flex-col">
+        <div className="w-screen h-screen flex flex-col font-poppins">
             <NavBar>
                 <Logo />
                 <SearchBar />
@@ -33,7 +33,7 @@ export default function App() {
                 />
             </NavBar>
             {/* flex div for sidebar and main content. */}
-            <div className="w-full h-full flex">
+            <div className="flex-1 flex flex-row overflow-hidden">
                 <SideBar>
                     <SideBarItem
                         SVGpath={HomeIcon}

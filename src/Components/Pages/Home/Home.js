@@ -14,7 +14,7 @@ export default function Home() {
         })();
     }, []);
     return (
-        <div className="w-full h-full flex flex-col p-[1.5rem] bg-black overflow-y-scroll">
+        <div className="bg-black p-[1rem]">
             {postIDArray.map((postID) => {
                 return <Post id={postID} key={postID} />;
             })}
