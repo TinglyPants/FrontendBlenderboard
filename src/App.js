@@ -13,6 +13,7 @@ import MainContent from "./Components/MainContent/MainContent";
 import { Route, Routes } from "react-router-dom";
 import { CreatePath, HomePath } from "./Components/Pages/paths";
 import PostCreation from "./Components/Pages/PostCreation/PostCreation";
+import SideBarButton from "./Components/SideBar/SideBarButton";
 
 export default function App() {
     return (
@@ -40,6 +41,7 @@ export default function App() {
                     />
                     <SideBarItem SVGpath={SearchIcon} text={"Search"} />
                     <SideBarItem SVGpath={ProfileIcon} text={"Account"} />
+                    <SideBarButton text={"Create Post"} path={CreatePath} />
                 </SideBar>
                 <MainContent>
                     <Routes>
