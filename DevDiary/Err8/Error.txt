@@ -1,0 +1,7 @@
+For some reason, my useNavigate is not working in my side bar button, but it is in the side bar item?
+
+Figure1 = code
+Figure2 = react error
+
+solved: i forgot to add brackets. THIS PROVES THAT SILLY MISTAKES ARE EASY!!
+Figure3 = code after
