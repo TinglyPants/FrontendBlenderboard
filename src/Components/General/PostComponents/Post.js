@@ -23,6 +23,6 @@ export default function Post({ id }) {
                 video: received.video,
             });
         })();
-    });
+    }, [id]);
     return <p className="text-white">{postData.title}</p>;
 }
