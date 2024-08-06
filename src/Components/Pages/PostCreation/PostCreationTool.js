@@ -96,6 +96,7 @@ export default function PostCreationTool() {
                     className="bg-highlight p-[0.5rem] rounded-[0.5rem]"
                     multiple
                     onChange={handleImagesChange}
+                    accept=".png, .jpg, .jpeg, .gif, .webp"
                 ></input>
 
                 <label className="mt-[1rem] text-[1.15rem]">Add Video:</label>
@@ -103,6 +104,7 @@ export default function PostCreationTool() {
                     type="file"
                     className="bg-highlight p-[0.5rem] rounded-[0.5rem]"
                     onChange={handleVideoChange}
+                    accept=".mp4, .webm, .ogg"
                 ></input>
 
                 <label className="mt-[1rem] text-[1.15rem]">Add Model:</label>
@@ -110,6 +112,7 @@ export default function PostCreationTool() {
                     type="file"
                     className="bg-highlight p-[0.5rem] rounded-[0.5rem]"
                     onChange={handleModelChange}
+                    accept=".obj, .fbx, .stl, .gltf, .glb, .dae"
                 ></input>
 
                 <button
