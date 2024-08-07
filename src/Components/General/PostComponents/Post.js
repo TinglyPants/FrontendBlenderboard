@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import MediaViewer from "../MediaViewer/MediaViewer";
 
 export default function Post({ id }) {
     const [postData, setPostData] = useState({
@@ -32,13 +33,7 @@ export default function Post({ id }) {
             <p className="mx-[1rem] text-white text-lg font-semibold overflow-hidden text-ellipsis whitespace-nowrap">
                 {postData.description}
             </p>
-            {/* Media component will go here later */}
-            <div
-                id="placeholder"
-                className="bg-black h-[22rem] rounded-xl m-[1rem] text-red-500"
-            >
-                PLACEHOLDER
-            </div>
+            <MediaViewer mediaIDs={postData.images} />
         </div>
     );
 }
