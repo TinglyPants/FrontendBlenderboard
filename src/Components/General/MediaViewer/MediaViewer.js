@@ -31,7 +31,7 @@ export default function MediaViewer({ mediaIDs }) {
                         <img
                             alt=""
                             className="flex-1 object-contain bg-black"
-                            src={`http://localhost:4000/media/image/${id}`}
+                            src={`http://86.167.176.156:4000/media/image/${id}`}
                         />
                     </div>
                 );

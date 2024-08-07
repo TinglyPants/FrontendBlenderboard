@@ -13,7 +13,7 @@ export default function Post({ id }) {
     useEffect(() => {
         (async () => {
             const response = await fetch(
-                "http://localhost:4000/posts/read/" + id
+                "http://86.167.176.156:4000/posts/read/" + id
             );
             const received = await response.json();
             setPostData({

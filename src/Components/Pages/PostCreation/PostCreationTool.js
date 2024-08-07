@@ -37,10 +37,13 @@ export default function PostCreationTool() {
         postCreationFormData.append("model", postCreationData.model);
 
         try {
-            const response = await fetch("http://localhost:4000/posts/create", {
-                method: "POST",
-                body: postCreationFormData,
-            });
+            const response = await fetch(
+                "http://86.167.176.156:4000/posts/create",
+                {
+                    method: "POST",
+                    body: postCreationFormData,
+                }
+            );
 
             const data = await response.json();
             console.log(data);
