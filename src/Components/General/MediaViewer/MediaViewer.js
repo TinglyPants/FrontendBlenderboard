@@ -50,7 +50,7 @@ export default function MediaViewer({ mediaIDs }) {
                         />
                     </div>
                     <div
-                        className="p-[1rem] absolute right-0 h-full w-[12rem] flex items-center justify-center group"
+                        className="p-[1rem] absolute right-0 h-full w-[12rem] flex items-center justify-center group cursor-pointer"
                         onClick={cycleNext}
                     >
                         <SVGIcon
