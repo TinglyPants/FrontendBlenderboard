@@ -6,11 +6,15 @@ export default function Home() {
 
     useEffect(() => {
         (async () => {
-            const response = await fetch(
-                "http://localhost:4000/posts/homepage"
-            );
-            const received = await response.json();
-            setPostIDArray(received);
+            try {
+                const response = await fetch(
+                    "http://localhost:4000/posts/homepage"
+                );
+                const received = await response.json();
+                setPostIDArray(received);
+            } catch (err) {
+                console.log("Unable to contact API.");
+            }
         })();
     }, []);
     return (

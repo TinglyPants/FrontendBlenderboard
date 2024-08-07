@@ -18,7 +18,7 @@ import Home from "./Components/Pages/Home/Home";
 
 export default function App() {
     return (
-        <div className="w-screen h-screen flex flex-col font-poppins">
+        <div className="w-screen h-screen flex flex-col font-poppins bg-black">
             <NavBar>
                 <Logo />
                 <SearchBar />
