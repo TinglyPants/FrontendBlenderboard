@@ -1,0 +1,46 @@
+Problem: The media viewer component is huge!
+
+Figure1 = site
+Figure2 = code (ignore error thats an eslint thing)
+
+Solution: place it in a div.
+This kinda worked
+
+Figure3 = site now
+Figure4 = code
+
+Problem is, the image is overflowing.
+Solution: css
+
+Figure5 = site now
+Figure6 = code
+
+Wonderful! How on earth do I get this to work with multiple images?
+Well, ill instantiate all of the images I need first, then translate them with CSS to show them!
+
+Figure7 = site super zoomed out
+Figure8 = code stripped down of css
+
+Now to add CSS until it looks good!
+Figure9 = site
+Figure10 = code
+
+As you can see on line 9, I have used a style attribute rather than tailwind. This is because tailwind uses a preprocessor to handle classes,
+therefore cannot effectively be used for more dynamic css. This is an easy thing to work around though.
+
+Problem: cannot cycle through images. Solution: useState hooks
+
+Figure11 = site
+Figure12 = code
+
+Almost done, I just need to be able to choose to go forwards or backwards.
+Im going to have some absolutely positioned divs with SVGs of arrows that only appear when you hover. Sounds easy enough, right?
+
+Figure13 = site
+Figure14 = code
+
+That was not bad at all, thanks tailwindcss!
+
+One last thing: If the media only has one image, we dont need any buttons to appear. To fix that, Ill use the short circuit operator!
+
+Figure15 = code (notice use of fragments)

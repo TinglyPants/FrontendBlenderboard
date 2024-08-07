@@ -26,11 +26,11 @@ export default function Post({ id }) {
         })();
     }, [id]);
     return (
-        <div className="bg-mid rounded-xl w-full flex flex-col mb-[2rem]">
-            <h1 className="mx-[1rem] mt-[1rem] mb-[0.25rem] text-white text-3xl font-semibold">
+        <div className="bg-mid rounded-xl w-full max-h-[44rem] flex flex-col mb-[2rem]">
+            <h1 className="mx-[1rem] mt-[1rem] mb-[0.25rem] text-white text-3xl font-semibold flex-none">
                 {postData.title}
             </h1>
-            <p className="mx-[1rem] text-white text-lg font-semibold overflow-hidden text-ellipsis whitespace-nowrap">
+            <p className="mx-[1rem] text-white text-lg font-semibold overflow-hidden text-ellipsis whitespace-nowrap flex-none">
                 {postData.description}
             </p>
             <MediaViewer mediaIDs={postData.images} />
