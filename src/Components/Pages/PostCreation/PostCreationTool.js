@@ -1,9 +1,13 @@
 import { useContext } from "react";
 import { PostCreationContext } from "./PostCreation";
+import { useNavigate } from "react-router-dom";
+import { HomePath } from "../paths";
 
 export default function PostCreationTool() {
     const [postCreationData, setPostCreationData] =
         useContext(PostCreationContext);
+
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -47,6 +51,8 @@ export default function PostCreationTool() {
 
             const data = await response.json();
             console.log(data);
+
+            navigate(HomePath);
         } catch (err) {
             console.error(err);
         }
