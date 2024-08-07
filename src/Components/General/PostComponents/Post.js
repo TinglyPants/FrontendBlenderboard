@@ -33,7 +33,7 @@ export default function Post({ id }) {
             <p className="mx-[1rem] text-white text-lg font-semibold overflow-hidden text-ellipsis whitespace-nowrap flex-none">
                 {postData.description}
             </p>
-            <MediaViewer mediaIDs={postData.images} />
+            <MediaViewer videoID={postData.video} imageIDs={postData.images} />
         </div>
     );
 }

@@ -1,0 +1,14 @@
+Again not really an error, but we need video support in the media viewer.
+
+Step1: separate mediaIds into video and images
+
+Figure1 = code
+Done. Everything still works, i think.
+
+Problem: video is not being rendered or anything yet.
+Solution: add video tags n stuff
+
+Figure2 = site
+Figure3 = code after
+
+That was.... surprisingly easy?

@@ -2,11 +2,17 @@ import { useState } from "react";
 import SVGIcon from "../SVGIcon/SVGIcon";
 import { nextArrowIcon, prevArrowIcon } from "../SVGIcon/icons";
 
-export default function MediaViewer({ mediaIDs }) {
+export default function MediaViewer({ videoID, imageIDs }) {
     const [mediaIndex, setMediaIndex] = useState(0);
 
+    let totalLength = imageIDs.length;
+
+    if (videoID !== undefined) {
+        totalLength += 1;
+    }
+
     const cycleNext = () => {
-        if (mediaIndex === mediaIDs.length - 1) {
+        if (mediaIndex === totalLength - 1) {
             setMediaIndex(0);
             return;
         }
@@ -15,14 +21,26 @@ export default function MediaViewer({ mediaIDs }) {
 
     const cyclePrev = () => {
         if (mediaIndex === 0) {
-            setMediaIndex(mediaIDs.length - 1);
+            setMediaIndex(totalLength - 1);
             return;
         }
         setMediaIndex((prev) => prev - 1);
     };
     return (
-        <div className="flex-1 w-full flex overflow-hidden relative">
-            {mediaIDs.map((id) => {
+        <div className="flex-1 w-full flex overflow-hidden relative select-none">
+            {videoID !== undefined && (
+                <div
+                    className="p-[1rem] w-full flex-none flex duration-200"
+                    style={{ translate: `${-100 * mediaIndex}%` }}
+                >
+                    <video controls className="flex-1 bg-black px-[12rem]">
+                        <source
+                            src={`http://86.167.176.156:4000/media/video/${videoID}`}
+                        />
+                    </video>
+                </div>
+            )}
+            {imageIDs.map((id) => {
                 return (
                     <div
                         className="p-[1rem] w-full flex-none flex duration-200"
@@ -36,7 +54,7 @@ export default function MediaViewer({ mediaIDs }) {
                     </div>
                 );
             })}
-            {mediaIDs.length > 1 && (
+            {totalLength > 1 && (
                 <>
                     <div
                         className="p-[1rem] absolute h-full w-[12rem] flex items-center justify-center group cursor-pointer"
