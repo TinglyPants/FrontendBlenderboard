@@ -1,0 +1,23 @@
+* Remember, the same tests are done for both backend and frontend!
+Create Post:
+9.1 N/A
+9.2 N/A
+9.3 Passed, console logs "You need to include a title!"
+9.4 Passed, valid title
+9.5 Passed, valid title
+9.6 Passed, valid title
+9.7 Failed, I forgot to add a maximum limit.
+9.8 Passed, console logs.
+9.9 Passed, valid description
+9.10 Passed, valid description
+9.11 Passed, valid description
+9.12 Failed, forgot to add maximum limit.
+9.13 Passed
+9.14 Technically passed and failed, although site requires IMAGE at least one, not video.
+9.15 Failed, requires at least one image atm
+9.16 Passed
+9.17 Passed
+9.18 Passed
+9.19 Passed
+9.20 Passed (Need to update backend though!)
+9.21 - 9.27 N/A not implemented
