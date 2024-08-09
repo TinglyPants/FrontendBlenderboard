@@ -11,17 +11,39 @@ export default function PostCreationTool() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // guard clauses to prevent invalid post
+        // Eventually an error popup will be used
+        // Title checks
         if (postCreationData.title === "") {
             console.log("You need to include a title!");
             return;
         }
+        if (postCreationData.title.length > 120) {
+            console.log("Your title is too big!");
+            return;
+        }
+
+        // Description checks
         if (postCreationData.description === "") {
             console.log("You need to include a description!");
             return;
         }
-        if (postCreationData.images.length === 0) {
-            console.log("You need to include at least one image!");
+        if (postCreationData.description.length > 3000) {
+            console.log("Your description is too big!");
+            return;
+        }
+
+        // Media presence check
+        if (
+            postCreationData.images.length === 0 &&
+            postCreationData.video === undefined
+        ) {
+            console.log("You need to include at least one media!");
+            return;
+        }
+
+        // Image count check
+        if (postCreationData.images.length > 12) {
+            console.log("Too many images!");
             return;
         }
 
@@ -49,10 +71,16 @@ export default function PostCreationTool() {
                 }
             );
 
-            const data = await response.json();
-            console.log(data);
-
-            navigate(HomePath);
+            if (response.status === 200) {
+                console.log("Successful post creation.");
+                navigate(HomePath);
+            } else {
+                console.log(
+                    `Error code: ${
+                        response.status
+                    }, message: ${await response.text()}`
+                );
+            }
         } catch (err) {
             console.error(err);
         }
