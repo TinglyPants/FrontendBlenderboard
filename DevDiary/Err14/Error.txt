@@ -1,0 +1,12 @@
+Problem: How do i reliably use and store JWT tokens for auth?
+Well, I want to do it manually. Ill use a context provider to make the auth data available throughout the whole app.
+In terms of actual storage, I have three options: Cookies, local storage and session storage. Cookies would make
+sense, but since my frontend application contacts a remote API on a different server I cannot use cookies here.
+Session storage is similar to local storage, except it is wiped whenever the tab is closed. This is not the desired behaviour.
+Therefore, I will use local storage. Local storage is stored until either the user clears it or my code does. perfect.
+I will manually attach the auth data to requests that need it. 
+
+Auth tokens will be stored once they are received from the server and retrieved from local storage when needed. If needed, they
+will be sent in requests. Thats the plan!
+
+This is less of an error and more of a plan, but i think it is useful to log this down!
