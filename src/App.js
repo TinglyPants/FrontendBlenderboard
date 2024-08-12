@@ -11,10 +11,11 @@ import {
 } from "./Components/General/SVGIcon/icons";
 import MainContent from "./Components/MainContent/MainContent";
 import { Route, Routes } from "react-router-dom";
-import { CreatePath, HomePath } from "./Components/Pages/paths";
+import { CreatePath, HomePath, SignupPath } from "./Components/Pages/paths";
 import PostCreation from "./Components/Pages/PostCreation/PostCreation";
 import SideBarButton from "./Components/SideBar/SideBarButton";
 import Home from "./Components/Pages/Home/Home";
+import Signup from "./Components/Pages/Signup/Signup";
 
 export default function App() {
     return (
@@ -48,6 +49,7 @@ export default function App() {
                     <Routes>
                         <Route path={HomePath} element={<Home />} />
                         <Route path={CreatePath} element={<PostCreation />} />
+                        <Route path={SignupPath} element={<Signup />} />
                     </Routes>
                 </MainContent>
             </div>
