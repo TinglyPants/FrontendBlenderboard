@@ -1,4 +1,5 @@
 import { useState } from "react";
+import BlenderboardIcon from "../../General/SVGIcon/BlenderboardIcon";
 
 export default function Signup() {
     const [username, setUsername] = useState("");
@@ -76,7 +77,13 @@ export default function Signup() {
     return (
         <div className="w-full h-full p-[1.5rem] bg-black text-white flex justify-center items-center">
             <div className="bg-mid h-fit w-[40rem] rounded-2xl flex flex-col items-center p-[0.75rem]">
-                <h1 className="font-semibold text-[4rem]">Sign up!</h1>
+                <div className="flex w-full h-[5rem] justify-center">
+                    <BlenderboardIcon />
+                    <h1 className="font-semibold text-[4rem] text-nowrap ml-[1rem]">
+                        Sign up!
+                    </h1>
+                </div>
+
                 <form
                     className="w-full mt-[1rem] flex flex-col items-center"
                     onSubmit={handleSubmit}
