@@ -58,42 +58,54 @@ export default function Signup() {
     };
 
     return (
-        <div className="w-full h-full flex p-[1.5rem] bg-black text-white">
-            <form
-                className=" flex flex-col justify-evenly"
-                onSubmit={handleSubmit}
-            >
-                <input
-                    type="text"
-                    placeholder="username"
-                    className="bg-mid"
-                    onChange={handleUsernameChange}
-                />
-                <input
-                    type="text"
-                    placeholder="bio"
-                    className="bg-mid"
-                    onChange={handleBioChange}
-                />
-                <input
-                    type="text"
-                    placeholder="email"
-                    className="bg-mid"
-                    onChange={handleEmailChange}
-                />
-                <input
-                    type="text"
-                    placeholder="password"
-                    className="bg-mid"
-                    onChange={handlePasswordChange}
-                />
-                <input
-                    type="file"
-                    className="bg-mid"
-                    onChange={handleProfileImageChange}
-                />
-                <input type="submit" />
-            </form>
+        <div className="w-full h-full p-[1.5rem] bg-black text-white flex justify-center items-center">
+            <div className="bg-mid h-fit w-[40rem] rounded-2xl flex flex-col items-center p-[0.75rem]">
+                <h1 className="font-semibold text-[4rem]">Sign up!</h1>
+                <form className="w-full mt-[1rem] flex flex-col items-center">
+                    <input
+                        placeholder="Email"
+                        className="bg-black text-white p-[0.5rem] rounded-lg w-[30rem] mt-[0.5rem]"
+                    />
+                    <input
+                        placeholder="Password"
+                        type="password"
+                        className="bg-black text-white p-[0.5rem] rounded-lg w-[30rem] mt-[0.65rem]"
+                    />
+                    <input
+                        placeholder="Confirm Password"
+                        type="password"
+                        className="bg-black text-white p-[0.5rem] rounded-lg w-[30rem] mt-[0.65rem]"
+                    />
+                    <div className="flex flex-row items-center mt-[0.65rem]">
+                        <input
+                            type="checkbox"
+                            className="size-[1.25rem] accent-highlight"
+                        />
+                        <p className="ml-[0.5rem]">Show Password</p>
+                    </div>
+                    <input
+                        placeholder="Username"
+                        className="bg-black text-white p-[0.5rem] rounded-lg w-[30rem] mt-[0.65rem]"
+                    />
+                    <textarea
+                        placeholder="Bio (Optional)"
+                        className="bg-black text-white p-[0.5rem] rounded-lg w-[30rem] mt-[0.65rem] h-[4rem] max-h-[12rem]"
+                    />
+                    <input
+                        type="file"
+                        className="bg-highlight text-white p-[0.5rem] rounded-lg w-[30rem] mt-[0.65rem]"
+                    />
+                </form>
+                <div className="w-[12rem] my-[3rem] rounded-full overflow-hidden aspect-square flex flex-col items-center bg-black shrink-0">
+                    {(
+                        <img
+                            className="h-full"
+                            src={profileImage}
+                            alt="Preview"
+                        />
+                    ) && true}
+                </div>
+            </div>
         </div>
     );
 }
