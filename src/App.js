@@ -16,43 +16,54 @@ import PostCreation from "./Components/Pages/PostCreation/PostCreation";
 import SideBarButton from "./Components/SideBar/SideBarButton";
 import Home from "./Components/Pages/Home/Home";
 import Signup from "./Components/Pages/Signup/Signup";
+import ErrorViewer from "./Components/General/ErrorViewer/ErrorViewer";
+import { createContext, useState } from "react";
+
+export const ErrorContext = createContext();
 
 export default function App() {
+    const [errorMessage, setErrorMessage] = useState("");
     return (
         <div className="w-screen h-screen flex flex-col font-poppins bg-black">
-            <NavBar>
-                <Logo />
-                <SearchBar />
-                <Profile
-                    username={"Cat#302241"}
-                    email={
-                        "EXAMPLE-TEXT EXAMPLE-TEXT EXAMPLE-TEXT EXAMPLE-TEXT EXAMPLE-TEXT EXAMPLE-TEXT"
-                    }
-                    image={
-                        "https://images.pexels.com/photos/1314550/pexels-photo-1314550.jpeg?auto=compress&cs=tinysrgb&w=600"
-                    }
-                />
-            </NavBar>
-            {/* flex div for sidebar and main content. */}
-            <div className="flex-1 flex flex-row overflow-hidden">
-                <SideBar>
-                    <SideBarItem
-                        SVGpath={HomeIcon}
-                        text={"Home"}
-                        path={HomePath}
+            <ErrorContext.Provider value={[errorMessage, setErrorMessage]}>
+                <ErrorViewer />
+                <NavBar>
+                    <Logo />
+                    <SearchBar />
+                    <Profile
+                        username={"Cat#302241"}
+                        email={
+                            "EXAMPLE-TEXT EXAMPLE-TEXT EXAMPLE-TEXT EXAMPLE-TEXT EXAMPLE-TEXT EXAMPLE-TEXT"
+                        }
+                        image={
+                            "https://images.pexels.com/photos/1314550/pexels-photo-1314550.jpeg?auto=compress&cs=tinysrgb&w=600"
+                        }
                     />
-                    <SideBarItem SVGpath={SearchIcon} text={"Search"} />
-                    <SideBarItem SVGpath={ProfileIcon} text={"Account"} />
-                    <SideBarButton text={"Create Post"} path={CreatePath} />
-                </SideBar>
-                <MainContent>
-                    <Routes>
-                        <Route path={HomePath} element={<Home />} />
-                        <Route path={CreatePath} element={<PostCreation />} />
-                        <Route path={SignupPath} element={<Signup />} />
-                    </Routes>
-                </MainContent>
-            </div>
+                </NavBar>
+                {/* flex div for sidebar and main content. */}
+                <div className="flex-1 flex flex-row overflow-hidden">
+                    <SideBar>
+                        <SideBarItem
+                            SVGpath={HomeIcon}
+                            text={"Home"}
+                            path={HomePath}
+                        />
+                        <SideBarItem SVGpath={SearchIcon} text={"Search"} />
+                        <SideBarItem SVGpath={ProfileIcon} text={"Account"} />
+                        <SideBarButton text={"Create Post"} path={CreatePath} />
+                    </SideBar>
+                    <MainContent>
+                        <Routes>
+                            <Route path={HomePath} element={<Home />} />
+                            <Route
+                                path={CreatePath}
+                                element={<PostCreation />}
+                            />
+                            <Route path={SignupPath} element={<Signup />} />
+                        </Routes>
+                    </MainContent>
+                </div>
+            </ErrorContext.Provider>
         </div>
     );
 }
