@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import BlenderboardIcon from "../../General/SVGIcon/BlenderboardIcon";
+import { ErrorContext } from "../../../App";
+import { useNavigate } from "react-router-dom";
 
 export default function Signup() {
     const [username, setUsername] = useState("");
@@ -9,6 +11,9 @@ export default function Signup() {
     const [passwordConfirm, setPasswordConfirm] = useState("");
     const [profileImage, setProfileImage] = useState(undefined);
     const [previewImage, setPreviewImage] = useState(undefined);
+
+    const setErrorMessage = useContext(ErrorContext)[1];
+    const navigate = useNavigate();
 
     const reader = new FileReader();
     reader.addEventListener("load", () => {
@@ -62,12 +67,9 @@ export default function Signup() {
 
             if (response.status === 200) {
                 console.log("Successful user creation.");
+                navigate("/");
             } else {
-                console.log(
-                    `Error code: ${
-                        response.status
-                    }, message: ${await response.text()}`
-                );
+                setErrorMessage(`${response.status}: ${await response.text()}`);
             }
         } catch (err) {
             console.error(err);
@@ -147,7 +149,7 @@ export default function Signup() {
                     />
                     <input
                         type="submit"
-                        className="w-[12rem] bg-highlight rounded-full p-[0.5rem] mt-[1rem]"
+                        className="w-[12rem] bg-highlight rounded-full p-[0.5rem] mt-[1rem] cursor-pointer"
                     />
                 </form>
                 <div className="w-[12rem] my-[2rem] rounded-full overflow-hidden aspect-square flex flex-col items-center bg-black shrink-0">
