@@ -1,8 +1,18 @@
 import { jwtDecode } from "jwt-decode";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { SignupPath } from "../Pages/paths";
 
 export default function Profile({ username, email, image }) {
     const [userData, setUserData] = useState(null);
+
+    const navigate = useNavigate();
+
+    const handleClick = () => {
+        if (userData === null) {
+            navigate(SignupPath);
+        }
+    };
 
     useEffect(() => {
         function checkUpdate() {
@@ -13,6 +23,8 @@ export default function Profile({ username, email, image }) {
             }
         }
 
+        checkUpdate();
+
         window.addEventListener("storage", checkUpdate);
 
         return () => {
@@ -20,7 +32,10 @@ export default function Profile({ username, email, image }) {
         };
     }, []);
     return (
-        <div className="w-[24rem] h-full flex mx-[3rem] cursor-pointer py-[1.5rem]">
+        <div
+            className="w-[24rem] h-full flex mx-[3rem] cursor-pointer py-[1.5rem]"
+            onClick={handleClick}
+        >
             <div className="pr-[1.25rem] max-w-[16rem]">
                 <p className="text-white overflow-hidden text-ellipsis whitespace-nowrap">
                     {userData !== null

@@ -11,13 +11,19 @@ import {
 } from "./Components/General/SVGIcon/icons";
 import MainContent from "./Components/MainContent/MainContent";
 import { Route, Routes } from "react-router-dom";
-import { CreatePath, HomePath, SignupPath } from "./Components/Pages/paths";
+import {
+    CreatePath,
+    HomePath,
+    LoginPath,
+    SignupPath,
+} from "./Components/Pages/paths";
 import PostCreation from "./Components/Pages/PostCreation/PostCreation";
 import SideBarButton from "./Components/SideBar/SideBarButton";
 import Home from "./Components/Pages/Home/Home";
 import Signup from "./Components/Pages/Signup/Signup";
 import ErrorViewer from "./Components/General/ErrorViewer/ErrorViewer";
 import { createContext, useState } from "react";
+import Login from "./Components/Pages/Login/Login";
 
 export const ErrorContext = createContext();
 
@@ -60,6 +66,7 @@ export default function App() {
                                 element={<PostCreation />}
                             />
                             <Route path={SignupPath} element={<Signup />} />
+                            <Route path={LoginPath} element={<Login />} />
                         </Routes>
                     </MainContent>
                 </div>
