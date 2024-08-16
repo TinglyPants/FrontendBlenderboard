@@ -153,6 +153,7 @@ export default function Signup() {
                         type="file"
                         className="bg-highlight text-white p-[0.5rem] rounded-lg w-[30rem] mt-[0.65rem]"
                         onChange={handleProfileImageChange}
+                        accept=".png, .jpg, .jpeg, .gif, .webp"
                     />
                     <input
                         type="submit"
