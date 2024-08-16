@@ -73,6 +73,7 @@ export default function Signup() {
             if (response.status === 200) {
                 let receivedToken = (await response.json()).accessToken;
                 localStorage.setItem("accessToken", receivedToken);
+                window.dispatchEvent(new Event("storage"));
                 navigate("/");
             } else {
                 setErrorMessage(`${await response.text()}`);
