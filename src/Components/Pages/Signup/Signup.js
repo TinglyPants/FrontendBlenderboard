@@ -59,6 +59,11 @@ export default function Signup() {
         formData.append("password", password);
         formData.append("profileImage", profileImage);
 
+        if (passwordConfirm !== password) {
+            setErrorMessage("Passwords do not match.");
+            return;
+        }
+
         try {
             const response = await fetch("http://localhost:4000/users/create", {
                 method: "POST",
@@ -66,10 +71,11 @@ export default function Signup() {
             });
 
             if (response.status === 200) {
-                console.log("Successful user creation.");
+                let receivedToken = (await response.json()).accessToken;
+                localStorage.setItem("accessToken", receivedToken);
                 navigate("/");
             } else {
-                setErrorMessage(`${response.status}: ${await response.text()}`);
+                setErrorMessage(`${await response.text()}`);
             }
         } catch (err) {
             console.error(err);

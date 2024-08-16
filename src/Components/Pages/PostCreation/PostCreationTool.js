@@ -62,14 +62,16 @@ export default function PostCreationTool() {
         postCreationFormData.append("video", postCreationData.video);
         postCreationFormData.append("model", postCreationData.model);
 
+        postCreationFormData.append(
+            "accessToken",
+            localStorage.getItem("accessToken")
+        );
+
         try {
-            const response = await fetch(
-                "http://86.167.176.156:4000/posts/create",
-                {
-                    method: "POST",
-                    body: postCreationFormData,
-                }
-            );
+            const response = await fetch("http://localhost:4000/posts/create", {
+                method: "POST",
+                body: postCreationFormData,
+            });
 
             if (response.status === 200) {
                 console.log("Successful post creation.");
