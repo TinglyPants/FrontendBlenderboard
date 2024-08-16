@@ -1,8 +1,12 @@
+import { useNavigate } from "react-router-dom";
+import { HomePath } from "../Pages/paths";
+
 export default function Logo() {
+    const navigate = useNavigate();
     return (
         <div
             className="w-[16rem] h-full flex mx-[3rem] cursor-pointer shrink-0"
-            onClick={() => console.log("Clicked Logo")}
+            onClick={() => navigate(HomePath)}
         >
             <svg
                 id="Layer_2"

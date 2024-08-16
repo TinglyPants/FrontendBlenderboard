@@ -8,7 +8,7 @@ export default function Home() {
         (async () => {
             try {
                 const response = await fetch(
-                    "http://86.167.176.156:4000/posts/homepage"
+                    "http://localhost:4000/posts/homepage"
                 );
                 const received = await response.json();
                 setPostIDArray(received);
