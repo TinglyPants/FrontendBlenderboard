@@ -1,6 +1,7 @@
 import { useState } from "react";
 import SVGIcon from "../SVGIcon/SVGIcon";
 import { nextArrowIcon, prevArrowIcon } from "../SVGIcon/icons";
+import { ApiUrl } from "../../../config";
 
 export default function MediaViewer({ videoID, imageIDs }) {
     const [mediaIndex, setMediaIndex] = useState(0);
@@ -34,9 +35,7 @@ export default function MediaViewer({ videoID, imageIDs }) {
                     style={{ translate: `${-100 * mediaIndex}%` }}
                 >
                     <video controls className="flex-1 bg-black px-[12rem]">
-                        <source
-                            src={`http://86.167.176.156:4000/media/video/${videoID}`}
-                        />
+                        <source src={`${ApiUrl}/media/video/${videoID}`} />
                     </video>
                 </div>
             )}
@@ -49,7 +48,7 @@ export default function MediaViewer({ videoID, imageIDs }) {
                         <img
                             alt=""
                             className="flex-1 object-contain bg-black"
-                            src={`http://86.167.176.156:4000/media/image/${id}`}
+                            src={`${ApiUrl}/media/image/${id}`}
                         />
                     </div>
                 );

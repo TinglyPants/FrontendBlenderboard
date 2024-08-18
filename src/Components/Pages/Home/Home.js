@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Post from "../../General/PostComponents/Post";
+import { ApiUrl } from "../../../config";
 
 export default function Home() {
     const [postIDArray, setPostIDArray] = useState([]);
@@ -7,9 +8,7 @@ export default function Home() {
     useEffect(() => {
         (async () => {
             try {
-                const response = await fetch(
-                    "http://localhost:4000/posts/homepage"
-                );
+                const response = await fetch(`${ApiUrl}/posts/homepage`);
                 const received = await response.json();
                 setPostIDArray(received);
             } catch (err) {

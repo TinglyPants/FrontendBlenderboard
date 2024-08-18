@@ -3,6 +3,7 @@ import { PostCreationContext } from "./PostCreation";
 import { useNavigate } from "react-router-dom";
 import { HomePath } from "../paths";
 import { ErrorContext } from "../../../App";
+import { ApiUrl } from "../../../config";
 
 export default function PostCreationTool() {
     const [postCreationData, setPostCreationData] =
@@ -34,7 +35,7 @@ export default function PostCreationTool() {
             localStorage.getItem("accessToken")
         );
 
-        const response = await fetch("http://localhost:4000/posts/create", {
+        const response = await fetch(`${ApiUrl}/posts/create`, {
             method: "POST",
             body: postCreationFormData,
         });

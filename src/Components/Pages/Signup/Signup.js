@@ -3,6 +3,7 @@ import BlenderboardIcon from "../../General/SVGIcon/BlenderboardIcon";
 import { ErrorContext } from "../../../App";
 import { useNavigate } from "react-router-dom";
 import { LoginPath } from "../paths";
+import { ApiUrl } from "../../../config";
 
 export default function Signup() {
     const [username, setUsername] = useState("");
@@ -66,7 +67,7 @@ export default function Signup() {
         }
 
         try {
-            const response = await fetch("http://localhost:4000/users/create", {
+            const response = await fetch(`${ApiUrl}/users/create`, {
                 method: "POST",
                 body: formData,
             });

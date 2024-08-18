@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import MediaViewer from "../MediaViewer/MediaViewer";
+import { ApiUrl } from "../../../config";
 
 export default function Post({ id }) {
     const [postData, setPostData] = useState({
@@ -12,9 +13,7 @@ export default function Post({ id }) {
 
     useEffect(() => {
         (async () => {
-            const response = await fetch(
-                "http://86.167.176.156:4000/posts/read/" + id
-            );
+            const response = await fetch(`${ApiUrl}/posts/read/${id}`);
             const received = await response.json();
             setPostData({
                 title: received.title,

@@ -3,6 +3,7 @@ import BlenderboardIcon from "../../General/SVGIcon/BlenderboardIcon";
 import { ErrorContext } from "../../../App";
 import { useNavigate } from "react-router-dom";
 import { SignupPath } from "../paths";
+import { ApiUrl } from "../../../config";
 
 export default function Login() {
     const [email, setEmail] = useState("");
@@ -27,7 +28,7 @@ export default function Login() {
         formData.append("password", password);
 
         try {
-            const response = await fetch("http://localhost:4000/users/login", {
+            const response = await fetch(`${ApiUrl}/users/login`, {
                 method: "POST",
                 body: formData,
             });
