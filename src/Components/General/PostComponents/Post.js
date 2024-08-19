@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import MediaViewer from "../MediaViewer/MediaViewer";
 import { ApiUrl } from "../../../config";
+import { useNavigate } from "react-router-dom";
 
 export default function Post({ id }) {
     const [postData, setPostData] = useState({
@@ -17,6 +18,14 @@ export default function Post({ id }) {
         username: "Loading...",
         profileImage: undefined,
     });
+
+    const navigate = useNavigate();
+
+    const handleProfileClick = () => {
+        if (postData.author !== undefined) {
+            navigate("/account/" + postData.author);
+        }
+    };
 
     useEffect(() => {
         (async () => {
@@ -71,7 +80,10 @@ export default function Post({ id }) {
                         {postData.description}
                     </p>
                 </div>
-                <div className="flex flex-row w-min pr-[4rem] cursor-pointer">
+                <div
+                    className="flex flex-row w-min pr-[4rem] cursor-pointer"
+                    onClick={handleProfileClick}
+                >
                     <div className="mr-[1rem] w-full max-w-[50rem] flex flex-col justify-evenly">
                         <h2 className="text-right text-lg">
                             {authorData.username}

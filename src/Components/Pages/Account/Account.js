@@ -49,7 +49,7 @@ export default function Account() {
     }, [id]);
     return (
         <div className="w-full h-full bg-black flex p-[1.5rem]">
-            <div className="w-[32rem] bg-mid rounded-xl shrink-0 flex flex-col items-center">
+            <div className="w-[32rem] h-fit pb-[1rem] bg-mid rounded-xl shrink-0 flex flex-col items-center">
                 <div className="w-[22rem] aspect-square bg-black rounded-full mt-[1rem] overflow-hidden border-[3px] border-lightest">
                     <img
                         src={
@@ -68,10 +68,12 @@ export default function Account() {
                 <h2 className="w-full text-lightest text-lg px-[1rem]">
                     {userData.email}
                 </h2>
-                <div className="px-[1rem]">
-                    <p className="w-full text-white p-[0.5rem] mt-[0.75rem] hyphens-auto break-words bg-black rounded-lg">
-                        {userData.bio}
-                    </p>
+                <div className="px-[1rem] w-full">
+                    {userData.bio ? (
+                        <p className="w-full text-white p-[0.5rem] mt-[0.75rem] hyphens-auto break-words bg-black rounded-lg">
+                            {userData.bio}
+                        </p>
+                    ) : null}
                 </div>
             </div>
             <div className="ml-[2rem]">
