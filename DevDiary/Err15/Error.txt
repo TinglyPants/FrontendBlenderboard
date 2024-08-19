@@ -1,0 +1,11 @@
+Not really an error, but I need some plans and goals.
+
+Plan:
+Get the 3d scene renderer to work, with model viewing, options for lighting and various helpers like axes and UV textures - also need to texture the model (PBR?)!
+Get the 3d scene renderer to appear when needed with the post viewing page
+get the post viewing page up and running
+Most important of all, the scene renderer needs to be flexible and have lots of options! I need to re-do the post creation page to accommodate this
+I need options for pbr, non-pbr, different textures, filetypes etc. Also need example renders of stuff!
+Ill need a context provider for the whole thing... thats a pain.
+
+This was a fun brainstorm.
