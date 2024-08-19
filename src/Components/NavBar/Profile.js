@@ -12,7 +12,10 @@ export default function Profile() {
     const handleClick = () => {
         if (userData === null) {
             navigate(SignupPath);
+            return;
         }
+
+        navigate("/account/" + userData._id);
     };
 
     useEffect(() => {
