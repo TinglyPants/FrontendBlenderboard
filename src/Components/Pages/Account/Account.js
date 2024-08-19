@@ -1,7 +1,8 @@
 import { useParams } from "react-router-dom";
 import Post from "../../General/PostComponents/Post";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { ApiUrl } from "../../../config";
+import { ErrorContext } from "../../../App";
 
 export default function Account() {
     const { id } = useParams();
@@ -12,9 +13,18 @@ export default function Account() {
         profileImage: undefined,
     });
 
+    const [postIDArray, setPostIDArray] = useState([]);
+    const setErrorMessage = useContext(ErrorContext)[1];
+
     useEffect(() => {
         (async () => {
             const response = await fetch(`${ApiUrl}/users/read/${id}`);
+
+            if (response.status !== 200) {
+                setErrorMessage(await response.text());
+                return;
+            }
+
             const received = await response.json();
             setUserData({
                 username: received.username,
@@ -22,6 +32,19 @@ export default function Account() {
                 bio: received.bio,
                 profileImage: received.profileImage,
             });
+        })();
+    }, [id]);
+
+    useEffect(() => {
+        (async () => {
+            const response = await fetch(`${ApiUrl}/posts/userpage/${id}`);
+
+            if (response.status !== 200) {
+                return;
+            }
+
+            const received = await response.json();
+            setPostIDArray(received);
         })();
     }, [id]);
     return (
@@ -51,7 +74,11 @@ export default function Account() {
                     </p>
                 </div>
             </div>
-            <div className="ml-[2rem]"></div>
+            <div className="ml-[2rem]">
+                {postIDArray.map((postID) => {
+                    return <Post id={postID} key={postID} />;
+                })}
+            </div>
         </div>
     );
 }
