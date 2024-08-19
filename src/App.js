@@ -12,6 +12,7 @@ import {
 import MainContent from "./Components/MainContent/MainContent";
 import { Route, Routes } from "react-router-dom";
 import {
+    AccountPath,
     CreatePath,
     HomePath,
     LoginPath,
@@ -24,6 +25,7 @@ import Signup from "./Components/Pages/Signup/Signup";
 import ErrorViewer from "./Components/General/ErrorViewer/ErrorViewer";
 import { createContext, useState } from "react";
 import Login from "./Components/Pages/Login/Login";
+import Account from "./Components/Pages/Account/Account";
 
 export const ErrorContext = createContext();
 
@@ -60,13 +62,23 @@ export default function App() {
                     </SideBar>
                     <MainContent>
                         <Routes>
-                            <Route path={HomePath} element={<Home />} />
+                            <Route exact path={HomePath} element={<Home />} />
                             <Route
+                                exact
                                 path={CreatePath}
                                 element={<PostCreation />}
                             />
-                            <Route path={SignupPath} element={<Signup />} />
-                            <Route path={LoginPath} element={<Login />} />
+                            <Route
+                                exact
+                                path={SignupPath}
+                                element={<Signup />}
+                            />
+                            <Route exact path={LoginPath} element={<Login />} />
+                            <Route
+                                exact
+                                path={AccountPath}
+                                element={<Account />}
+                            />
                         </Routes>
                     </MainContent>
                 </div>
