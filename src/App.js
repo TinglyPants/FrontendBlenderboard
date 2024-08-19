@@ -26,6 +26,7 @@ import ErrorViewer from "./Components/General/ErrorViewer/ErrorViewer";
 import { createContext, useState } from "react";
 import Login from "./Components/Pages/Login/Login";
 import Account from "./Components/Pages/Account/Account";
+import SideBarAccount from "./Components/SideBar/SideBarAccount";
 
 export const ErrorContext = createContext();
 
@@ -57,7 +58,10 @@ export default function App() {
                             path={HomePath}
                         />
                         <SideBarItem SVGpath={SearchIcon} text={"Search"} />
-                        <SideBarItem SVGpath={ProfileIcon} text={"Account"} />
+                        <SideBarAccount
+                            SVGpath={ProfileIcon}
+                            text={"Account"}
+                        />
                         <SideBarButton text={"Create Post"} path={CreatePath} />
                     </SideBar>
                     <MainContent>
