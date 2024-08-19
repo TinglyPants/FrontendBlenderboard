@@ -37,7 +37,7 @@ export default function App() {
         <div className="w-screen h-screen flex flex-col font-poppins bg-black">
             <ErrorContext.Provider value={[errorMessage, setErrorMessage]}>
                 <ErrorViewer />
-                <SceneViewer />
+                {/* <SceneViewer /> */}
                 <NavBar>
                     <Logo />
                     <SearchBar />
