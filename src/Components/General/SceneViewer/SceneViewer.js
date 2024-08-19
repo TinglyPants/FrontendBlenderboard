@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import * as THREE from "three";
+import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 
 export default function SceneViewer() {
     useEffect(() => {
@@ -23,7 +24,10 @@ export default function SceneViewer() {
         renderer.setSize(divContainer.clientWidth, divContainer.clientHeight);
         divContainer.appendChild(renderer.domElement);
 
+        const controls = new OrbitControls(camera, renderer.domElement);
+
         function animate() {
+            controls.update();
             renderer.render(scene, camera);
         }
         renderer.setAnimationLoop(animate);
