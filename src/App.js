@@ -16,6 +16,7 @@ import {
     CreatePath,
     HomePath,
     LoginPath,
+    PostViewingPath,
     SignupPath,
 } from "./Components/Pages/paths";
 import PostCreation from "./Components/Pages/PostCreation/PostCreation";
@@ -28,6 +29,7 @@ import Login from "./Components/Pages/Login/Login";
 import Account from "./Components/Pages/Account/Account";
 import SideBarAccount from "./Components/SideBar/SideBarAccount";
 import SceneViewer from "./Components/General/SceneViewer/SceneViewer";
+import PostViewing from "./Components/Pages/PostViewing/PostViewing";
 
 export const ErrorContext = createContext();
 export const SceneViewerContext = createContext();
@@ -35,7 +37,7 @@ export const SceneViewerContext = createContext();
 export default function App() {
     const [errorMessage, setErrorMessage] = useState("");
     const [sceneSettings, setSceneSettings] = useState({
-        sceneViewerEnabled: true,
+        sceneViewerEnabled: false,
         modelFilename: undefined,
         modelType: undefined,
     });
@@ -104,6 +106,11 @@ export default function App() {
                                     exact
                                     path={AccountPath}
                                     element={<Account />}
+                                />
+                                <Route
+                                    exact
+                                    path={PostViewingPath}
+                                    element={<PostViewing />}
                                 />
                             </Routes>
                         </MainContent>
