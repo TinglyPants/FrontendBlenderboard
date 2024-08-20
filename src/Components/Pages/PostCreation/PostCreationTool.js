@@ -16,28 +16,23 @@ export default function PostCreationTool() {
         e.preventDefault();
 
         // Building FormData object to send to API
-        const postCreationFormData = new FormData();
+        const formData = new FormData();
 
-        postCreationFormData.append("title", postCreationData.title);
-        postCreationFormData.append(
-            "description",
-            postCreationData.description
-        );
+        formData.append("title", postCreationData.title);
+        formData.append("description", postCreationData.description);
+
         // append individual files to FormData:
         for (let i = 0; i < postCreationData.images.length; i++) {
-            postCreationFormData.append("images", postCreationData.images[i]);
+            formData.append("images", postCreationData.images[i]);
         }
-        postCreationFormData.append("video", postCreationData.video);
-        postCreationFormData.append("model", postCreationData.model);
+        formData.append("video", postCreationData.video);
+        formData.append("model", postCreationData.model);
 
-        postCreationFormData.append(
-            "accessToken",
-            localStorage.getItem("accessToken")
-        );
+        formData.append("accessToken", localStorage.getItem("accessToken"));
 
         const response = await fetch(`${ApiUrl}/posts/create`, {
             method: "POST",
-            body: postCreationFormData,
+            body: formData,
         });
 
         if (response.status === 200) {
