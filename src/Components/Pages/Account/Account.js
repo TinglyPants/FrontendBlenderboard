@@ -17,7 +17,9 @@ export default function Account() {
     const [postIDArray, setPostIDArray] = useState([]);
     const setErrorMessage = useContext(ErrorContext)[1];
 
+    // Gathering user's data
     useEffect(() => {
+        // useEffect requires an async IIFE as useEffect callbacks cannot be async
         (async () => {
             const response = await fetch(`${ApiUrl}/users/read/${id}`);
 
@@ -36,7 +38,9 @@ export default function Account() {
         })();
     }, [id]);
 
+    // Gathering user's posts
     useEffect(() => {
+        // useEffect requires an async IIFE as useEffect callbacks cannot be async
         (async () => {
             const response = await fetch(`${ApiUrl}/posts/userpage/${id}`);
 
