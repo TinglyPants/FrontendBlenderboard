@@ -24,14 +24,6 @@ export default function PostViewing() {
         profileImage: undefined,
     });
 
-    const navigate = useNavigate();
-
-    const handleProfileClick = () => {
-        if (postData.author !== undefined) {
-            navigate("/account/" + postData.author);
-        }
-    };
-
     useEffect(() => {
         (async () => {
             const response = await fetch(`${ApiUrl}/posts/read/${id}`);
@@ -42,7 +34,6 @@ export default function PostViewing() {
             }
 
             const received = await response.json();
-            console.log(received);
             setPostData({
                 title: received.title,
                 description: received.description,
@@ -80,10 +71,12 @@ export default function PostViewing() {
                     profileImage={authorData.profileImage}
                     username={authorData.username}
                     dateOfCreation={postData.dateOfCreation}
+                    author={postData.author}
                 />
                 <PostMediaCard
                     videoID={postData.video}
                     imageIDs={postData.images}
+                    modelID={postData.model}
                 />
             </div>
         </div>

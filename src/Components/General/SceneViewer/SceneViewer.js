@@ -1,15 +1,20 @@
 import { useContext, useEffect, useRef } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader";
+import { STLLoader } from "three/examples/jsm/loaders/STLLoader";
+import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader";
 import { SceneViewerContext } from "../../../App";
 import SVGIcon from "../SVGIcon/SVGIcon";
 import { CloseIcon } from "../SVGIcon/icons";
+import { ApiUrl } from "../../../config";
 
 export default function SceneViewer() {
     const showAxes = useRef(false);
     const [sceneSettings, setSceneSettings] = useContext(SceneViewerContext);
 
     useEffect(() => {
+        console.log(sceneSettings);
         const divContainer = document.getElementById("scene-container");
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(
@@ -21,6 +26,53 @@ export default function SceneViewer() {
 
         const ambientLight = new THREE.AmbientLight(0x404040, 2); // soft white light
         scene.add(ambientLight);
+
+        // Model processing:
+
+        switch (sceneSettings.modelType) {
+            case "obj":
+                const objLoader = new OBJLoader();
+                objLoader.load(
+                    `${ApiUrl}/media/model/${sceneSettings.modelFilename}`,
+                    (object) => {
+                        scene.add(object);
+                    }
+                );
+                break;
+            case "fbx":
+                const fbxLoader = new FBXLoader();
+                fbxLoader.load(
+                    `${ApiUrl}/media/model/${sceneSettings.modelFilename}`,
+                    (object) => {
+                        scene.add(object);
+                    }
+                );
+                break;
+            case "stl":
+                const stlLoader = new STLLoader();
+                stlLoader.load(
+                    `${ApiUrl}/media/model/${sceneSettings.modelFilename}`,
+                    (geometry) => {
+                        // Create a mesh from the geometry
+                        const material = new THREE.MeshStandardMaterial({
+                            color: 0x00ff00,
+                        });
+                        const mesh = new THREE.Mesh(geometry, material);
+
+                        scene.add(mesh);
+                    }
+                );
+                break;
+            // To be added
+            case "gltf":
+                break;
+            case "glb":
+                break;
+            case "dae":
+                break;
+            default:
+                console.log("Unknown model type.");
+        }
 
         camera.position.z = 5;
 
