@@ -1,0 +1,9 @@
+This project is getting pretty messy, especially with all of the tailwind classes making it hard to read stuff. 
+
+I want to break down large react function components into smaller ones that could be re-used later if needed. Files are
+getting too big.
+
+Plan:
+Go through each page and slowly break down until nice and readable.
+Any repeated code can be extracted to functions in other files.
+Add comments if needed, and improve variable naming.
