@@ -13,8 +13,14 @@ export default function SceneViewer() {
     const showAxes = useRef(false);
     const [sceneSettings, setSceneSettings] = useContext(SceneViewerContext);
 
+    const wireframeEvent = new CustomEvent("wireframe");
+    const handleWireframe = () => {
+        document
+            .getElementById("scene-container")
+            .dispatchEvent(wireframeEvent);
+    };
+
     useEffect(() => {
-        console.log(sceneSettings);
         const divContainer = document.getElementById("scene-container");
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(
@@ -24,10 +30,17 @@ export default function SceneViewer() {
             1000
         );
 
-        const ambientLight = new THREE.AmbientLight(0x404040, 2); // soft white light
+        const ambientLight = new THREE.AmbientLight(0x404040, 200); // soft white light
         scene.add(ambientLight);
 
         // Model processing:
+
+        const sceneGlobalMaterial = new THREE.MeshStandardMaterial();
+        sceneGlobalMaterial.color = new THREE.Color(0x12f43e);
+
+        divContainer.addEventListener("wireframe", () => {
+            sceneGlobalMaterial.wireframe = true;
+        });
 
         switch (sceneSettings.modelType) {
             case "obj":
@@ -35,6 +48,11 @@ export default function SceneViewer() {
                 objLoader.load(
                     `${ApiUrl}/media/model/${sceneSettings.modelFilename}`,
                     (object) => {
+                        object.traverse((child) => {
+                            if (child.isMesh) {
+                                child.material = sceneGlobalMaterial;
+                            }
+                        });
                         scene.add(object);
                     }
                 );
@@ -82,6 +100,8 @@ export default function SceneViewer() {
 
         const controls = new OrbitControls(camera, renderer.domElement);
 
+        console.log(scene);
+
         function animate() {
             controls.update();
             renderer.render(scene, camera);
@@ -115,6 +135,9 @@ export default function SceneViewer() {
                     });
                 }}
             />
+            <button className="absolute" onClick={handleWireframe}>
+                Click
+            </button>
         </div>
     );
 }

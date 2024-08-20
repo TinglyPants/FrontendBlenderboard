@@ -10,7 +10,17 @@ export default function PostCreation() {
         description: "",
         images: FileList,
         video: undefined,
-        model: undefined,
+        mesh: undefined,
+        alphaMap: undefined,
+        ambientOcclusionMap: undefined,
+        bumpMap: undefined,
+        displacementMap: undefined,
+        emissiveMap: undefined,
+        metalnessMap: undefined,
+        normalMap: undefined,
+        roughnessMap: undefined,
+        albedoMap: undefined,
+        isTangentSpace: true,
     });
 
     return (
