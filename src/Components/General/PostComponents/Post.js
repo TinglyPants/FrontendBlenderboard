@@ -28,6 +28,10 @@ export default function Post({ id }) {
         }
     };
 
+    const handlePostClick = () => {
+        navigate("/post/" + id);
+    };
+
     useEffect(() => {
         (async () => {
             const response = await fetch(`${ApiUrl}/posts/read/${id}`);
@@ -76,7 +80,10 @@ export default function Post({ id }) {
     return (
         <div className="bg-mid rounded-xl w-full max-h-[44rem] flex flex-col mb-[2rem] text-white">
             <div className="flex flex-row w-full h-[5rem] pt-[0.75rem] justify-between">
-                <div className="pl-[1rem] w-full max-w-[50rem] flex flex-col justify-around">
+                <div
+                    className="pl-[1rem] w-full max-w-[50rem] flex flex-col justify-around"
+                    onClick={handlePostClick}
+                >
                     <h1 className="overflow-hidden text-ellipsis whitespace-nowrap text-2xl">
                         {postData.title}
                     </h1>
