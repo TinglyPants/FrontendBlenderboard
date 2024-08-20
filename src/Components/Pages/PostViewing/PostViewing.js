@@ -1,9 +1,12 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { ApiUrl } from "../../../config";
+import PostInfoCard from "./PostInfoCard";
+import { ErrorContext } from "../../../App";
 
 export default function PostViewing() {
     const { id } = useParams();
+    const setErrorMessage = useContext(ErrorContext)[1];
 
     const [postData, setPostData] = useState({
         title: "Loading...",
@@ -31,7 +34,14 @@ export default function PostViewing() {
     useEffect(() => {
         (async () => {
             const response = await fetch(`${ApiUrl}/posts/read/${id}`);
+
+            if (response.status !== 200) {
+                setErrorMessage(await response.text());
+                return;
+            }
+
             const received = await response.json();
+            console.log(received);
             setPostData({
                 title: received.title,
                 description: received.description,
@@ -49,6 +59,9 @@ export default function PostViewing() {
             const response = await fetch(
                 `${ApiUrl}/users/read/${postData.author}`
             );
+            if (response.status !== 200) {
+                return;
+            }
             const received = await response.json();
             setAuthorData({
                 username: received.username,
@@ -57,20 +70,17 @@ export default function PostViewing() {
         })();
     }, [postData.author]);
 
-    const dateStringToFormattedDate = (initial) => {
-        const date = new Date(Date.parse(initial));
-        const day = date.getDate();
-        const month = date.getMonth() + 1; // months are zero based for some reason
-        const year = date.getFullYear();
-
-        return [
-            (day > 9 ? "" : "0") + day,
-            (month > 9 ? "" : "0") + month,
-            year,
-        ].join("/");
-    };
-
     return (
-        <div className="w-full h-full flex flex-col p-[1.5rem] bg-black"></div>
+        <div className="w-full h-full flex flex-col p-[1.5rem] bg-black">
+            <div className="flex flex-row w-full h-full">
+                <PostInfoCard
+                    title={postData.title}
+                    description={postData.description}
+                    profileImage={authorData.profileImage}
+                    username={authorData.username}
+                    dateOfCreation={postData.dateOfCreation}
+                />
+            </div>
+        </div>
     );
 }
