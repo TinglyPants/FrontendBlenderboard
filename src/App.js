@@ -30,64 +30,85 @@ import SideBarAccount from "./Components/SideBar/SideBarAccount";
 import SceneViewer from "./Components/General/SceneViewer/SceneViewer";
 
 export const ErrorContext = createContext();
+export const SceneViewerContext = createContext();
 
 export default function App() {
     const [errorMessage, setErrorMessage] = useState("");
+    const [sceneSettings, setSceneSettings] = useState({
+        sceneViewerEnabled: true,
+        modelFilename: undefined,
+        modelType: undefined,
+    });
     return (
         <div className="w-screen h-screen flex flex-col font-poppins bg-black">
             <ErrorContext.Provider value={[errorMessage, setErrorMessage]}>
-                <ErrorViewer />
-                {/* <SceneViewer /> */}
-                <NavBar>
-                    <Logo />
-                    <SearchBar />
-                    <Profile
-                        username={"Cat#302241"}
-                        email={
-                            "EXAMPLE-TEXT EXAMPLE-TEXT EXAMPLE-TEXT EXAMPLE-TEXT EXAMPLE-TEXT EXAMPLE-TEXT"
-                        }
-                        image={
-                            "https://images.pexels.com/photos/1314550/pexels-photo-1314550.jpeg?auto=compress&cs=tinysrgb&w=600"
-                        }
-                    />
-                </NavBar>
-                {/* flex div for sidebar and main content. */}
-                <div className="flex-1 flex flex-row overflow-hidden">
-                    <SideBar>
-                        <SideBarItem
-                            SVGpath={HomeIcon}
-                            text={"Home"}
-                            path={HomePath}
+                <SceneViewerContext.Provider
+                    value={[sceneSettings, setSceneSettings]}
+                >
+                    <ErrorViewer />
+                    {sceneSettings.sceneViewerEnabled && <SceneViewer />}
+                    <NavBar>
+                        <Logo />
+                        <SearchBar />
+                        <Profile
+                            username={"Cat#302241"}
+                            email={
+                                "EXAMPLE-TEXT EXAMPLE-TEXT EXAMPLE-TEXT EXAMPLE-TEXT EXAMPLE-TEXT EXAMPLE-TEXT"
+                            }
+                            image={
+                                "https://images.pexels.com/photos/1314550/pexels-photo-1314550.jpeg?auto=compress&cs=tinysrgb&w=600"
+                            }
                         />
-                        <SideBarItem SVGpath={SearchIcon} text={"Search"} />
-                        <SideBarAccount
-                            SVGpath={ProfileIcon}
-                            text={"Account"}
-                        />
-                        <SideBarButton text={"Create Post"} path={CreatePath} />
-                    </SideBar>
-                    <MainContent>
-                        <Routes>
-                            <Route exact path={HomePath} element={<Home />} />
-                            <Route
-                                exact
+                    </NavBar>
+                    {/* flex div for sidebar and main content. */}
+                    <div className="flex-1 flex flex-row overflow-hidden">
+                        <SideBar>
+                            <SideBarItem
+                                SVGpath={HomeIcon}
+                                text={"Home"}
+                                path={HomePath}
+                            />
+                            <SideBarItem SVGpath={SearchIcon} text={"Search"} />
+                            <SideBarAccount
+                                SVGpath={ProfileIcon}
+                                text={"Account"}
+                            />
+                            <SideBarButton
+                                text={"Create Post"}
                                 path={CreatePath}
-                                element={<PostCreation />}
                             />
-                            <Route
-                                exact
-                                path={SignupPath}
-                                element={<Signup />}
-                            />
-                            <Route exact path={LoginPath} element={<Login />} />
-                            <Route
-                                exact
-                                path={AccountPath}
-                                element={<Account />}
-                            />
-                        </Routes>
-                    </MainContent>
-                </div>
+                        </SideBar>
+                        <MainContent>
+                            <Routes>
+                                <Route
+                                    exact
+                                    path={HomePath}
+                                    element={<Home />}
+                                />
+                                <Route
+                                    exact
+                                    path={CreatePath}
+                                    element={<PostCreation />}
+                                />
+                                <Route
+                                    exact
+                                    path={SignupPath}
+                                    element={<Signup />}
+                                />
+                                <Route
+                                    exact
+                                    path={LoginPath}
+                                    element={<Login />}
+                                />
+                                <Route
+                                    exact
+                                    path={AccountPath}
+                                    element={<Account />}
+                                />
+                            </Routes>
+                        </MainContent>
+                    </div>
+                </SceneViewerContext.Provider>
             </ErrorContext.Provider>
         </div>
     );

@@ -1,9 +1,13 @@
-import { useEffect, useRef } from "react";
+import { useContext, useEffect, useRef } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+import { SceneViewerContext } from "../../../App";
+import SVGIcon from "../SVGIcon/SVGIcon";
+import { CloseIcon } from "../SVGIcon/icons";
 
 export default function SceneViewer() {
     const showAxes = useRef(false);
+    const [sceneSettings, setSceneSettings] = useContext(SceneViewerContext);
 
     useEffect(() => {
         const divContainer = document.getElementById("scene-container");
@@ -47,6 +51,18 @@ export default function SceneViewer() {
                 zIndex: 2,
             }}
             id="scene-container"
-        ></div>
+        >
+            <SVGIcon
+                path={CloseIcon}
+                name="Close Renderer"
+                size="w-8 h-8 absolute right-[1rem] top-[1rem]"
+                onClick={() => {
+                    setSceneSettings({
+                        ...sceneSettings,
+                        sceneViewerEnabled: false,
+                    });
+                }}
+            />
+        </div>
     );
 }
