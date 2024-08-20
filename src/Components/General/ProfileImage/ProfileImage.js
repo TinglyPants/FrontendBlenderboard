@@ -4,16 +4,19 @@ import { DefaultProfileImg } from "../SVGIcon/DefaultProfileImg";
 export default function ProfileImage({
     profileImage,
     size = "w-[4rem] h-[4rem]", // default value
+    dataURL = false,
 }) {
     return (
         <div
-            className={`rounded-full overflow-hidden aspect-square bg-black shrink-0 mr-[1.5rem] ${size}`}
+            className={`rounded-full overflow-hidden aspect-square bg-black shrink-0 ${size}`}
         >
             <img
                 alt="User Profile"
                 src={
                     profileImage !== undefined
-                        ? `${ApiUrl}/media/image/${profileImage}`
+                        ? dataURL
+                            ? profileImage
+                            : `${ApiUrl}/media/image/${profileImage}`
                         : DefaultProfileImg
                 }
                 className="h-full w-full object-cover"
