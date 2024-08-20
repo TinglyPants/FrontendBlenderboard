@@ -48,7 +48,7 @@ export default function App() {
                     value={[sceneSettings, setSceneSettings]}
                 >
                     <ErrorViewer />
-                    {sceneSettings.sceneViewerEnabled && <SceneViewer />}
+                    {sceneSettings.sceneViewerEnabled ? <SceneViewer /> : null}
                     <NavBar>
                         <Logo />
                         <SearchBar />
