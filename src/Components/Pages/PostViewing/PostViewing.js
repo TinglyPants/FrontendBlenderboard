@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { ApiUrl } from "../../../config";
 import PostInfoCard from "./PostInfoCard";
 import { ErrorContext } from "../../../App";
+import PostMediaCard from "./PostMediaCard";
 
 export default function PostViewing() {
     const { id } = useParams();
@@ -79,6 +80,10 @@ export default function PostViewing() {
                     profileImage={authorData.profileImage}
                     username={authorData.username}
                     dateOfCreation={postData.dateOfCreation}
+                />
+                <PostMediaCard
+                    videoID={postData.video}
+                    imageIDs={postData.images}
                 />
             </div>
         </div>
