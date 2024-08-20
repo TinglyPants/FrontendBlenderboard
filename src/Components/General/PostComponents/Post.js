@@ -49,6 +49,9 @@ export default function Post({ id }) {
             const response = await fetch(
                 `${ApiUrl}/users/read/${postData.author}`
             );
+            if (response.status !== 200) {
+                return;
+            }
             const received = await response.json();
             setAuthorData({
                 username: received.username,
