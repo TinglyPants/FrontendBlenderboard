@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import ProfileImage from "../../General/ProfileImage/ProfileImage";
 
 export default function PostInfoCard({
@@ -6,6 +7,7 @@ export default function PostInfoCard({
     profileImage,
     username,
     dateOfCreation,
+    author,
 }) {
     const dateStringToFormattedDate = (initial) => {
         const date = new Date(Date.parse(initial));
@@ -20,6 +22,14 @@ export default function PostInfoCard({
         ].join("/");
     };
 
+    const navigate = useNavigate();
+
+    const handleProfileClick = () => {
+        if (author !== undefined) {
+            navigate("/account/" + author);
+        }
+    };
+
     return (
         <div className="w-[32rem] h-fit bg-mid rounded-xl shrink-0 flex flex-col items-center pb-[1rem]">
             <h1 className="w-full text-white text-3xl px-[1rem] mt-[1rem]">
@@ -30,7 +40,10 @@ export default function PostInfoCard({
                     {description}
                 </p>
             </div>
-            <div className="w-full flex flex-row-reverse mt-[1rem] mr-[2rem]">
+            <div
+                className="w-full flex flex-row-reverse mt-[1rem] mr-[2rem] cursor-pointer"
+                onClick={handleProfileClick}
+            >
                 <ProfileImage profileImage={profileImage} />
                 <div className="flex flex-col h-[4rem] mr-[1rem] justify-evenly">
                     <h2 className="w-full text-white text-right">{username}</h2>
