@@ -76,7 +76,7 @@ export default function PostViewing() {
                 <PostMediaCard
                     videoID={postData.video}
                     imageIDs={postData.images}
-                    modelID={postData.model}
+                    model={postData.model}
                 />
             </div>
         </div>

@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef } from "react";
+import { useContext, useEffect } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader";
@@ -10,15 +10,7 @@ import { CloseIcon } from "../SVGIcon/icons";
 import { ApiUrl } from "../../../config";
 
 export default function SceneViewer() {
-    const showAxes = useRef(false);
     const [sceneSettings, setSceneSettings] = useContext(SceneViewerContext);
-
-    const wireframeEvent = new CustomEvent("wireframe");
-    const handleWireframe = () => {
-        document
-            .getElementById("scene-container")
-            .dispatchEvent(wireframeEvent);
-    };
 
     useEffect(() => {
         const divContainer = document.getElementById("scene-container");
@@ -36,17 +28,77 @@ export default function SceneViewer() {
         // Model processing:
 
         const sceneGlobalMaterial = new THREE.MeshStandardMaterial();
-        sceneGlobalMaterial.color = new THREE.Color(0x12f43e);
+        sceneGlobalMaterial.color = new THREE.Color(0x808080);
+        const textureLoader = new THREE.TextureLoader();
 
-        divContainer.addEventListener("wireframe", () => {
-            sceneGlobalMaterial.wireframe = true;
-        });
+        if (sceneSettings.model.AlbedoMap) {
+            const albedoTexture = textureLoader.load(
+                `${ApiUrl}/media/map/${sceneSettings.model.AlbedoMap}`
+            );
+            sceneGlobalMaterial.map = albedoTexture;
+        }
+        if (sceneSettings.model.AlphaMap) {
+            const alphaTexture = textureLoader.load(
+                `${ApiUrl}/media/map/${sceneSettings.model.AlphaMap}`
+            );
+            sceneGlobalMaterial.alphaMap = alphaTexture;
+        }
+        if (sceneSettings.model.AmbientOcclusionMap) {
+            const ambientOcclusionTexture = textureLoader.load(
+                `${ApiUrl}/media/map/${sceneSettings.model.AmbientOcclusionMap}`
+            );
+            sceneGlobalMaterial.aoMap = ambientOcclusionTexture;
+        }
+        if (sceneSettings.model.BumpMap) {
+            const bumpTexture = textureLoader.load(
+                `${ApiUrl}/media/map/${sceneSettings.model.BumpMap}`
+            );
+            sceneGlobalMaterial.bumpMap = bumpTexture;
+        }
+        if (sceneSettings.model.DisplacementMap) {
+            const displacementTexture = textureLoader.load(
+                `${ApiUrl}/media/map/${sceneSettings.model.DisplacementMap}`
+            );
+            sceneGlobalMaterial.displacementMap = displacementTexture;
+        }
+        if (sceneSettings.model.EmissiveMap) {
+            const emissiveTexture = textureLoader.load(
+                `${ApiUrl}/media/map/${sceneSettings.model.EmissiveMap}`
+            );
+            sceneGlobalMaterial.emissive = new THREE.Color(0xffffff);
+            sceneGlobalMaterial.emissiveMap = emissiveTexture;
+        }
+        if (sceneSettings.model.MetalnessMap) {
+            const metalnessTexture = textureLoader.load(
+                `${ApiUrl}/media/map/${sceneSettings.model.MetalnessMap}`
+            );
+            sceneGlobalMaterial.metalness = 1.0;
+            sceneGlobalMaterial.metalnessMap = metalnessTexture;
+        }
+        if (sceneSettings.model.NormalMap) {
+            const normalTexture = textureLoader.load(
+                `${ApiUrl}/media/map/${sceneSettings.model.NormalMap}`
+            );
+            sceneGlobalMaterial.normalMap = normalTexture;
+            if (sceneSettings.model.IsTangentSpace === true) {
+                sceneGlobalMaterial.normalMapType = THREE.TangentSpaceNormalMap;
+            } else {
+                sceneGlobalMaterial.normalMapType = THREE.ObjectSpaceNormalMap;
+            }
+        }
+        if (sceneSettings.model.RoughnessMap) {
+            const roughnessTexture = textureLoader.load(
+                `${ApiUrl}/media/map/${sceneSettings.model.RoughnessMap}`
+            );
+            sceneGlobalMaterial.roughness = 1.0;
+            sceneGlobalMaterial.roughnessMap = roughnessTexture;
+        }
 
-        switch (sceneSettings.modelType) {
+        switch (sceneSettings.model.Mesh.split(".")[1]) {
             case "obj":
                 const objLoader = new OBJLoader();
                 objLoader.load(
-                    `${ApiUrl}/media/model/${sceneSettings.modelFilename}`,
+                    `${ApiUrl}/media/mesh/${sceneSettings.model.Mesh}`,
                     (object) => {
                         object.traverse((child) => {
                             if (child.isMesh) {
@@ -60,8 +112,13 @@ export default function SceneViewer() {
             case "fbx":
                 const fbxLoader = new FBXLoader();
                 fbxLoader.load(
-                    `${ApiUrl}/media/model/${sceneSettings.modelFilename}`,
+                    `${ApiUrl}/media/mesh/${sceneSettings.model.Mesh}`,
                     (object) => {
+                        object.traverse((child) => {
+                            if (child.isMesh) {
+                                child.material = sceneGlobalMaterial;
+                            }
+                        });
                         scene.add(object);
                     }
                 );
@@ -69,12 +126,10 @@ export default function SceneViewer() {
             case "stl":
                 const stlLoader = new STLLoader();
                 stlLoader.load(
-                    `${ApiUrl}/media/model/${sceneSettings.modelFilename}`,
+                    `${ApiUrl}/media/mesh/${sceneSettings.model.Mesh}`,
                     (geometry) => {
                         // Create a mesh from the geometry
-                        const material = new THREE.MeshStandardMaterial({
-                            color: 0x00ff00,
-                        });
+                        const material = sceneGlobalMaterial;
                         const mesh = new THREE.Mesh(geometry, material);
 
                         scene.add(mesh);
@@ -100,8 +155,6 @@ export default function SceneViewer() {
 
         const controls = new OrbitControls(camera, renderer.domElement);
 
-        console.log(scene);
-
         function animate() {
             controls.update();
             renderer.render(scene, camera);
@@ -112,7 +165,7 @@ export default function SceneViewer() {
             divContainer.removeChild(renderer.domElement);
             renderer.dispose();
         };
-    }, [showAxes]);
+    }, []);
 
     return (
         <div
@@ -135,9 +188,6 @@ export default function SceneViewer() {
                     });
                 }}
             />
-            <button className="absolute" onClick={handleWireframe}>
-                Click
-            </button>
         </div>
     );
 }

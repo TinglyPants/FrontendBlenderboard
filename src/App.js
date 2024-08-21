@@ -38,8 +38,7 @@ export default function App() {
     const [errorMessage, setErrorMessage] = useState("");
     const [sceneSettings, setSceneSettings] = useState({
         sceneViewerEnabled: false,
-        modelFilename: undefined,
-        modelType: undefined,
+        model: undefined,
     });
     return (
         <div className="w-screen h-screen flex flex-col font-poppins bg-black">

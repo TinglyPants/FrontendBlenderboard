@@ -5,16 +5,15 @@ import { SceneViewerContext } from "../../../App";
 import { ErrorContext } from "../../../App";
 import { useContext } from "react";
 
-export default function PostMediaCard({ videoID, imageIDs, modelID }) {
+export default function PostMediaCard({ videoID, imageIDs, model }) {
     const setSceneSettings = useContext(SceneViewerContext)[1];
     const setErrorMessage = useContext(ErrorContext)[1];
 
     const handleOpenSceneViewer = () => {
-        if (modelID !== undefined) {
+        if (model !== undefined) {
             setSceneSettings({
                 sceneViewerEnabled: true,
-                modelFilename: modelID,
-                modelType: modelID.split(".")[1],
+                model: model,
             });
         } else {
             setErrorMessage("This post does not have a 3D model!");
