@@ -1,0 +1,5 @@
+I need to do some more reading into .stl, .obj, .fbx, .glb, .gltf and .dae files.
+
+It has come to my attention that these files all store varying levels of information
+about a scene, therefore the backend and frontend need to accommodate these differences.
+I also don't know enough about each one to do this, so I shall find out now.
