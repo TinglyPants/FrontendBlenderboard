@@ -3,3 +3,96 @@ I need to do some more reading into .stl, .obj, .fbx, .glb, .gltf and .dae files
 It has come to my attention that these files all store varying levels of information
 about a scene, therefore the backend and frontend need to accommodate these differences.
 I also don't know enough about each one to do this, so I shall find out now.
+
+STL
+- Only stores information about MESH geometry.
+- No support for texture coordinates or anything
+- Does not store scale units
+
+OBJ
+- Stores info about geometry
+- Stores texture coordinates
+- Stores references to .mtl files for material properties
+- Can actually store more than one mesh using groups and objects
+
+MTL (with OBJ)
+- Stores info about the object materials:
+  - Ambient Color
+  - Diffuse Color
+  - Specular Color
+  - Emissive Color,
+  - Shininess,
+  - Transparency
+  - Optical Density (IOR)
+  - Illumination Model (0: Color on and Ambient off, 1: Color on and Ambient on (default), 2: Highlight on (specular reflections), Higher values enable more complex models (like reflection maps).)
+  - Links to texture maps as external files
+  - Reflection maps for environment or reflection mapping.
+
+FBX
+- Stores geometry
+- Stores texture coordinates (UV)
+- Stores vertex colors
+- Stores textures internally:
+  - Diffuse
+  - Specular
+  - Normal
+  - Bump
+  - Opacity
+  - Ambient Occlusion
+- Stores animations
+  - Keyframe animations
+  - Skeletal animations with rigs
+  - blend shapes
+  - Interpolation curves
+- Stores scene hierarchy
+  - Parent/child
+  - groups
+- Light sources
+- Camera positions
+- Rigging bones
+- IK information
+- Skin weights
+- Deformation - blend shapes, lattice deformers etc
+- Rigid bodies
+- Soft bodies
+- Colliders
+- Physics constraints
+- Also some metadata
+- Can also reference external texture files instead of internally storing them
+
+DAE
+- Stores geometry
+- Stores texture coordinates (UV)
+- Vertex colors
+- materials (diffuse, ambient, specular, emissive colors, and more.)
+- Links to external texture maps
+- Shaders
+- Animations 
+  - Keyframe
+  - Skeletal
+  - blend shapes
+- Scene hierarchy (parent/child, position rotation and scale)
+- Lights
+- Cameras
+- Physical properties (friction, drag, mass, colliders)
+- Kinematics (IK chains and movement constraints)
+- Scene graph (all objects in scene and hierarchy)
+- Metadata
+
+GLB and GLTF
+- NOTE: GLB packages all files into one, whereas GLTF stores them as references
+- Stores geometry
+- Stores texture coordinates
+- Stores vertex colors
+- materials (base color, metallic, roughness, normal maps, occlusion, and emissive properties.)
+- Textures
+- environment maps
+- Keyframe animations
+- Skeletal animations
+- blend shapes
+- Object relationships
+- transforms
+- Lights
+- Cameras
+- Bones and joints
+- Skinning and weights
