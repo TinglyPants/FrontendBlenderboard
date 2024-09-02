@@ -96,3 +96,7 @@ GLB and GLTF
 - Cameras
 - Bones and joints
 - Skinning and weights
+
+As I do not have a large development team to help me code individual renderers for each and every file type,
+I am going to instead focus purely on the .glb format as this has a wide range of features and packs everything into one file.
+It pains me to do this after the amount of work I put into this, but it must be done.
