@@ -17,6 +17,7 @@ import {
     HomePath,
     LoginPath,
     PostViewingPath,
+    SearchResultsPath,
     SignupPath,
 } from "./Components/Pages/paths";
 import PostCreation from "./Components/Pages/PostCreation/PostCreation";
@@ -30,6 +31,7 @@ import Account from "./Components/Pages/Account/Account";
 import SideBarAccount from "./Components/SideBar/SideBarAccount";
 import SceneViewer from "./Components/General/SceneViewer/SceneViewer";
 import PostViewing from "./Components/Pages/PostViewing/PostViewing";
+import Results from "./Components/Pages/Results/Results";
 
 export const ErrorContext = createContext();
 export const SceneViewerContext = createContext();
@@ -110,6 +112,11 @@ export default function App() {
                                     exact
                                     path={PostViewingPath}
                                     element={<PostViewing />}
+                                />
+                                <Route
+                                    exact
+                                    path={SearchResultsPath}
+                                    element={<Results />}
                                 />
                             </Routes>
                         </MainContent>
