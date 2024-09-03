@@ -1,6 +1,9 @@
-import { useNavigate } from "react-router-dom";
+import { Form, useNavigate } from "react-router-dom";
 import ProfileImage from "../../General/ProfileImage/ProfileImage";
 import { jwtDecode } from "jwt-decode";
+import { ApiUrl } from "../../../config";
+import { useContext } from "react";
+import { ErrorContext } from "../../../App";
 
 export default function PostInfoCard({
     title,
@@ -9,6 +12,7 @@ export default function PostInfoCard({
     username,
     dateOfCreation,
     author,
+    _id,
 }) {
     const dateStringToFormattedDate = (initial) => {
         const date = new Date(Date.parse(initial));
@@ -23,10 +27,26 @@ export default function PostInfoCard({
         ].join("/");
     };
 
+    const setErrorMessage = useContext(ErrorContext)[1];
     const navigate = useNavigate();
 
-    const handleDeletePost = () => {
-        navigate("/");
+    const handleDeletePost = async () => {
+        const formData = new FormData();
+        formData.append("accessToken", localStorage.getItem("accessToken"));
+        const response = await fetch(`${ApiUrl}/posts/delete/${_id}`, {
+            method: "DELETE",
+            body: formData,
+        });
+
+        if (response.status !== 200) {
+            setErrorMessage(await response.text());
+            return;
+        }
+
+        if (response.status === 200) {
+            navigate("/");
+            return;
+        }
     };
 
     const handleProfileClick = () => {

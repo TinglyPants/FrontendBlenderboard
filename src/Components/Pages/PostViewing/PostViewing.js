@@ -72,6 +72,7 @@ export default function PostViewing() {
                     username={authorData.username}
                     dateOfCreation={postData.dateOfCreation}
                     author={postData.author}
+                    _id={id}
                 />
                 <PostMediaCard
                     videoID={postData.video}
