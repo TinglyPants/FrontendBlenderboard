@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { ApiUrl } from "../../../config";
 import PostInfoCard from "./PostInfoCard";
 import { ErrorContext } from "../../../App";
