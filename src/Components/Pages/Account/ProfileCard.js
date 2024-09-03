@@ -1,6 +1,20 @@
+import { jwtDecode } from "jwt-decode";
 import ProfileImage from "../../General/ProfileImage/ProfileImage";
+import { useNavigate } from "react-router-dom";
 
-export default function ProfileCard({ profileImage, username, email, bio }) {
+export default function ProfileCard({
+    profileImage,
+    username,
+    email,
+    bio,
+    _id,
+}) {
+    const navigate = useNavigate();
+    const handleLogout = () => {
+        localStorage.removeItem("accessToken");
+        window.dispatchEvent(new Event("storage"));
+        navigate("/");
+    };
     return (
         <div className="w-[32rem] h-fit pb-[1rem] bg-mid rounded-xl shrink-0 flex flex-col items-center">
             <ProfileImage
@@ -18,6 +32,19 @@ export default function ProfileCard({ profileImage, username, email, bio }) {
                     </p>
                 ) : null}
             </div>
+            {localStorage.getItem("accessToken") !== null ? (
+                <>
+                    {_id ===
+                    jwtDecode(localStorage.getItem("accessToken"))._id ? (
+                        <button
+                            className="text-white bg-red-500 rounded-lg p-[0.75rem] mt-[1rem]"
+                            onClick={handleLogout}
+                        >
+                            Logout?
+                        </button>
+                    ) : null}
+                </>
+            ) : null}
         </div>
     );
 }

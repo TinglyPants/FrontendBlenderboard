@@ -59,6 +59,7 @@ export default function Account() {
                 username={userData.username}
                 email={userData.email}
                 bio={userData.bio}
+                _id={id}
             />
             <div className="ml-[2rem]">
                 {postIDArray.map((postID) => {

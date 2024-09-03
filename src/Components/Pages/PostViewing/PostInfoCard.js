@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import ProfileImage from "../../General/ProfileImage/ProfileImage";
+import { jwtDecode } from "jwt-decode";
 
 export default function PostInfoCard({
     title,
@@ -23,6 +24,10 @@ export default function PostInfoCard({
     };
 
     const navigate = useNavigate();
+
+    const handleDeletePost = () => {
+        navigate("/");
+    };
 
     const handleProfileClick = () => {
         if (author !== undefined) {
@@ -52,6 +57,19 @@ export default function PostInfoCard({
                     </p>
                 </div>
             </div>
+            {localStorage.getItem("accessToken") !== null ? (
+                <>
+                    {author ===
+                    jwtDecode(localStorage.getItem("accessToken"))._id ? (
+                        <button
+                            className="text-white bg-red-500 rounded-lg p-[0.75rem] mt-[1rem]"
+                            onClick={handleDeletePost}
+                        >
+                            Delete Post?
+                        </button>
+                    ) : null}
+                </>
+            ) : null}
         </div>
     );
 }
