@@ -1,43 +1,16 @@
-import { useContext, useEffect, useRef } from "react";
+import { useContext, useEffect } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
-import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader";
-import { STLLoader } from "three/examples/jsm/loaders/STLLoader";
-import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader";
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { SceneViewerContext } from "../../../App";
 import SVGIcon from "../SVGIcon/SVGIcon";
 import { CloseIcon } from "../SVGIcon/icons";
 import { ApiUrl } from "../../../config";
+import { EXRLoader } from "three/addons/loaders/EXRLoader.js";
+import RenderBG from "./RenderBG.exr";
 
 export default function SceneViewer() {
     const [sceneSettings, setSceneSettings] = useContext(SceneViewerContext);
-    let sceneGlobalMaterial = new THREE.MeshStandardMaterial();
-    const textureLoader = new THREE.TextureLoader();
-    const isColor = useRef(true);
-
-    const handleWireframeChange = () => {
-        sceneGlobalMaterial.wireframe = !sceneGlobalMaterial.wireframe;
-    };
-
-    const handleColorChange = () => {
-        isColor.current = !isColor.current;
-
-        if (isColor.current) {
-            if (sceneSettings.model.AlbedoMap) {
-                const albedoTexture = textureLoader.load(
-                    `${ApiUrl}/media/map/${sceneSettings.model.AlbedoMap}`
-                );
-                sceneGlobalMaterial.map = albedoTexture;
-            }
-            sceneGlobalMaterial.color = new THREE.Color(0x808080);
-        }
-        if (!isColor.current) {
-            if (sceneSettings.model.AlbedoMap) {
-                sceneGlobalMaterial.map = null;
-            }
-            sceneGlobalMaterial.color = new THREE.Color(0xff7518);
-        }
-    };
 
     useEffect(() => {
         const divContainer = document.getElementById("scene-container");
@@ -50,132 +23,34 @@ export default function SceneViewer() {
             1000
         );
 
-        const ambientLight = new THREE.AmbientLight(0x404040, 200); // soft white light
-        scene.add(ambientLight);
+        const renderer = new THREE.WebGLRenderer();
+        const clock = new THREE.Clock();
+        let mixer; // Animation Mixer
+
+        new EXRLoader().load(RenderBG, function (texture) {
+            const pmremGenerator = new THREE.PMREMGenerator(renderer);
+            pmremGenerator.compileEquirectangularShader();
+            texture.mapping = THREE.EquirectangularReflectionMapping;
+            scene.background = texture;
+            scene.environment =
+                pmremGenerator.fromEquirectangular(texture).texture;
+
+            pmremGenerator.dispose();
+        });
 
         // Model processing:
-
-        sceneGlobalMaterial.color = new THREE.Color(0x808080);
-
-        if (sceneSettings.model.AlbedoMap) {
-            const albedoTexture = textureLoader.load(
-                `${ApiUrl}/media/map/${sceneSettings.model.AlbedoMap}`
-            );
-            sceneGlobalMaterial.map = albedoTexture;
-        }
-        if (sceneSettings.model.AlphaMap) {
-            const alphaTexture = textureLoader.load(
-                `${ApiUrl}/media/map/${sceneSettings.model.AlphaMap}`
-            );
-            sceneGlobalMaterial.alphaMap = alphaTexture;
-        }
-        if (sceneSettings.model.AmbientOcclusionMap) {
-            const ambientOcclusionTexture = textureLoader.load(
-                `${ApiUrl}/media/map/${sceneSettings.model.AmbientOcclusionMap}`
-            );
-            sceneGlobalMaterial.aoMap = ambientOcclusionTexture;
-        }
-        if (sceneSettings.model.BumpMap) {
-            const bumpTexture = textureLoader.load(
-                `${ApiUrl}/media/map/${sceneSettings.model.BumpMap}`
-            );
-            sceneGlobalMaterial.bumpMap = bumpTexture;
-        }
-        if (sceneSettings.model.DisplacementMap) {
-            const displacementTexture = textureLoader.load(
-                `${ApiUrl}/media/map/${sceneSettings.model.DisplacementMap}`
-            );
-            sceneGlobalMaterial.displacementMap = displacementTexture;
-        }
-        if (sceneSettings.model.EmissiveMap) {
-            const emissiveTexture = textureLoader.load(
-                `${ApiUrl}/media/map/${sceneSettings.model.EmissiveMap}`
-            );
-            sceneGlobalMaterial.emissive = new THREE.Color(0xffffff);
-            sceneGlobalMaterial.emissiveMap = emissiveTexture;
-        }
-        if (sceneSettings.model.MetalnessMap) {
-            const metalnessTexture = textureLoader.load(
-                `${ApiUrl}/media/map/${sceneSettings.model.MetalnessMap}`
-            );
-            sceneGlobalMaterial.metalness = 1.0;
-            sceneGlobalMaterial.metalnessMap = metalnessTexture;
-        }
-        if (sceneSettings.model.NormalMap) {
-            const normalTexture = textureLoader.load(
-                `${ApiUrl}/media/map/${sceneSettings.model.NormalMap}`
-            );
-            sceneGlobalMaterial.normalMap = normalTexture;
-            if (sceneSettings.model.IsTangentSpace === true) {
-                sceneGlobalMaterial.normalMapType = THREE.TangentSpaceNormalMap;
-            } else {
-                sceneGlobalMaterial.normalMapType = THREE.ObjectSpaceNormalMap;
+        const loader = new GLTFLoader();
+        loader.load(ApiUrl + "/media/model/" + sceneSettings.model, (gltf) => {
+            scene.add(gltf.scene);
+            mixer = new THREE.AnimationMixer(gltf.scene);
+            for (let i = 0; i < gltf.animations.length; i++) {
+                const action = mixer.clipAction(gltf.animations[i]);
+                action.play();
             }
-        }
-        if (sceneSettings.model.RoughnessMap) {
-            const roughnessTexture = textureLoader.load(
-                `${ApiUrl}/media/map/${sceneSettings.model.RoughnessMap}`
-            );
-            sceneGlobalMaterial.roughness = 1.0;
-            sceneGlobalMaterial.roughnessMap = roughnessTexture;
-        }
-
-        switch (sceneSettings.model.Mesh.split(".")[1]) {
-            case "obj":
-                const objLoader = new OBJLoader();
-                objLoader.load(
-                    `${ApiUrl}/media/mesh/${sceneSettings.model.Mesh}`,
-                    (object) => {
-                        object.traverse((child) => {
-                            if (child.isMesh) {
-                                child.material = sceneGlobalMaterial;
-                            }
-                        });
-                        scene.add(object);
-                    }
-                );
-                break;
-            case "fbx":
-                const fbxLoader = new FBXLoader();
-                fbxLoader.load(
-                    `${ApiUrl}/media/mesh/${sceneSettings.model.Mesh}`,
-                    (object) => {
-                        object.traverse((child) => {
-                            if (child.isMesh) {
-                                child.material = sceneGlobalMaterial;
-                            }
-                        });
-                        scene.add(object);
-                    }
-                );
-                break;
-            case "stl":
-                const stlLoader = new STLLoader();
-                stlLoader.load(
-                    `${ApiUrl}/media/mesh/${sceneSettings.model.Mesh}`,
-                    (geometry) => {
-                        // Create a mesh from the geometry
-                        const material = sceneGlobalMaterial;
-                        const mesh = new THREE.Mesh(geometry, material);
-
-                        scene.add(mesh);
-                    }
-                );
-                break;
-            // To be added
-            case "gltf":
-                break;
-            case "glb":
-                break;
-            case "dae":
-                break;
-            default:
-                console.log("Unknown model type.");
-        }
+        });
 
         camera.position.z = 5;
 
-        const renderer = new THREE.WebGLRenderer();
         renderer.setSize(divContainer.clientWidth, divContainer.clientHeight);
         divContainer.appendChild(renderer.domElement);
 
@@ -183,9 +58,10 @@ export default function SceneViewer() {
 
         function animate() {
             controls.update();
-            // updates global material changes
-            sceneGlobalMaterial = sceneGlobalMaterial;
             renderer.render(scene, camera);
+            if (mixer) {
+                mixer.update(clock.getDelta());
+            }
         }
         renderer.setAnimationLoop(animate);
 
@@ -216,19 +92,6 @@ export default function SceneViewer() {
                     });
                 }}
             />
-            <button
-                className="absolute text-white left-[0.75rem] top-[0.75rem] hover:text-highlight"
-                onClick={handleWireframeChange}
-            >
-                Toggle wireframe
-            </button>
-
-            <button
-                className="absolute text-white left-[0.75rem] top-[2.75rem] hover:text-highlight"
-                onClick={handleColorChange}
-            >
-                Toggle colors
-            </button>
         </div>
     );
 }
