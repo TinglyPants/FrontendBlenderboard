@@ -7,7 +7,7 @@ export default function Results() {
     const [postIDArray, setPostIDArray] = useState(undefined);
     const { searchQuery } = useParams();
 
-    // Gathering homepage posts
+    // Gathering results posts
     useEffect(() => {
         // useEffect requires an async IIFE as useEffect callbacks cannot be async
         (async () => {
