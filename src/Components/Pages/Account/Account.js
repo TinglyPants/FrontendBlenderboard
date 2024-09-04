@@ -61,7 +61,7 @@ export default function Account() {
                 bio={userData.bio}
                 _id={id}
             />
-            <div className="ml-[2rem]">
+            <div className="ml-[2rem] w-full">
                 {postIDArray.map((postID) => {
                     return <Post id={postID} key={postID} />;
                 })}
