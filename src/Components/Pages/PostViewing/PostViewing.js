@@ -5,6 +5,8 @@ import PostInfoCard from "./PostInfoCard";
 import { ErrorContext } from "../../../App";
 import PostMediaCard from "./PostMediaCard";
 import CommentCreationTool from "./CommentCreationTool";
+import { comment } from "postcss";
+import Comment from "../../General/PostComponents/Comment";
 
 export const CommentCreationContext = createContext();
 
@@ -20,6 +22,7 @@ export default function PostViewing() {
         images: [],
         video: undefined,
         model: undefined,
+        comments: [],
     });
 
     const [authorData, setAuthorData] = useState({
@@ -51,6 +54,7 @@ export default function PostViewing() {
                 images: received.images,
                 video: received.video,
                 model: received.model,
+                comments: received.comments,
             });
         })();
     }, [id]);
@@ -72,7 +76,7 @@ export default function PostViewing() {
     }, [postData.author]);
 
     return (
-        <div className="w-full h-full flex flex-col p-[1.5rem] bg-black">
+        <div className="w-full flex flex-col p-[1.5rem] bg-black">
             <CommentCreationContext.Provider
                 value={[commentCreationData, setCommentCreationData]}
             >
@@ -98,6 +102,9 @@ export default function PostViewing() {
                             <CommentCreationTool />
                         </>
                     ) : null}
+                    {postData.comments.map((comment) => {
+                        return <Comment id={comment} />;
+                    })}
                 </div>
             </CommentCreationContext.Provider>
         </div>
