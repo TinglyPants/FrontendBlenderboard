@@ -2,6 +2,8 @@ import { useContext } from "react";
 import { CommentCreationContext } from "./PostViewing";
 import { ErrorContext } from "../../../App";
 import { ApiUrl } from "../../../config";
+import SVGIcon from "../../General/SVGIcon/SVGIcon";
+import { CloseIcon } from "../../General/SVGIcon/icons";
 
 export default function CommentCreationTool() {
     const [commentCreationData, setCommentCreationData] = useContext(
@@ -14,6 +16,13 @@ export default function CommentCreationTool() {
         setCommentCreationData({
             ...commentCreationData,
             content: e.target.value,
+        });
+    };
+
+    const handleCloseClick = () => {
+        setCommentCreationData({
+            ...commentCreationData,
+            isEditing: false,
         });
     };
 
@@ -49,12 +58,20 @@ export default function CommentCreationTool() {
                     className="bg-black text-white p-[0.5rem] rounded-lg w-full h-[4rem] max-h-[12rem]"
                     onChange={handleCommentContentChange}
                 ></textarea>
-                <button
-                    type="submit"
-                    className="w-[8rem] bg-highlight p-[0.5rem] rounded-full mt-[0.5rem] text-[1rem] font-semibold"
-                >
-                    Submit
-                </button>
+                <div className="flex justify-between">
+                    <button
+                        type="submit"
+                        className="w-[8rem] bg-highlight p-[0.5rem] rounded-full mt-[0.5rem] text-[1rem] font-semibold"
+                    >
+                        Submit
+                    </button>
+                    <SVGIcon
+                        path={CloseIcon}
+                        size="mt-[0.5rem] w-8 h-8"
+                        name="Close"
+                        onClick={handleCloseClick}
+                    />
+                </div>
             </form>
         </div>
     );

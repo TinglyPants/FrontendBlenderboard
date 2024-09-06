@@ -3,6 +3,8 @@ import MediaViewer from "../MediaViewer/MediaViewer";
 import { ApiUrl } from "../../../config";
 import { useNavigate } from "react-router-dom";
 import ProfileImage from "../ProfileImage/ProfileImage";
+import SVGIcon from "../SVGIcon/SVGIcon";
+import { CommentIcon } from "../SVGIcon/icons";
 
 export default function Post({ id }) {
     const [postData, setPostData] = useState({
@@ -78,10 +80,10 @@ export default function Post({ id }) {
     };
 
     return (
-        <div className="bg-mid rounded-xl w-full max-h-[44rem] flex flex-col mb-[2rem] text-white">
+        <div className="bg-mid rounded-xl w-full max-h-[50rem] flex flex-col mb-[2rem] text-white">
             <div className="flex flex-row w-full h-[5rem] pt-[0.75rem] justify-between">
                 <div
-                    className="pl-[1rem] w-full max-w-[50rem] flex flex-col justify-around"
+                    className="pl-[1rem] w-full max-w-[50rem] flex flex-col justify-around cursor-pointer"
                     onClick={handlePostClick}
                 >
                     <h1 className="overflow-hidden text-ellipsis whitespace-nowrap text-2xl">
@@ -110,6 +112,14 @@ export default function Post({ id }) {
                 </div>
             </div>
             <MediaViewer videoID={postData.video} imageIDs={postData.images} />
+            <div className="flex items-center w-full h-[3rem] mb-[0.5rem]">
+                <SVGIcon
+                    path={CommentIcon}
+                    name="Comment"
+                    size={"w-[3rem] h-[3rem]"}
+                    onClick={handlePostClick}
+                />
+            </div>
         </div>
     );
 }
