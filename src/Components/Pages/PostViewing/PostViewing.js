@@ -30,6 +30,7 @@ export default function PostViewing() {
     const [commentCreationData, setCommentCreationData] = useState({
         isEditing: false,
         content: "",
+        postID: id,
     });
 
     useEffect(() => {
