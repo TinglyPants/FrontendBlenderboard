@@ -4,6 +4,7 @@ import { ApiUrl } from "../../../config";
 import PostInfoCard from "./PostInfoCard";
 import { ErrorContext } from "../../../App";
 import PostMediaCard from "./PostMediaCard";
+import CommentCreationTool from "./CommentCreationTool";
 
 export const CommentCreationContext = createContext();
 
@@ -74,21 +75,28 @@ export default function PostViewing() {
             <CommentCreationContext.Provider
                 value={[commentCreationData, setCommentCreationData]}
             >
-                <div className="flex flex-row w-full h-full">
-                    <PostInfoCard
-                        title={postData.title}
-                        description={postData.description}
-                        profileImage={authorData.profileImage}
-                        username={authorData.username}
-                        dateOfCreation={postData.dateOfCreation}
-                        author={postData.author}
-                        _id={id}
-                    />
-                    <PostMediaCard
-                        videoID={postData.video}
-                        imageIDs={postData.images}
-                        model={postData.model}
-                    />
+                <div className="flex flex-col">
+                    <div className="flex flex-row w-full h-full">
+                        <PostInfoCard
+                            title={postData.title}
+                            description={postData.description}
+                            profileImage={authorData.profileImage}
+                            username={authorData.username}
+                            dateOfCreation={postData.dateOfCreation}
+                            author={postData.author}
+                            _id={id}
+                        />
+                        <PostMediaCard
+                            videoID={postData.video}
+                            imageIDs={postData.images}
+                            model={postData.model}
+                        />
+                    </div>
+                    {commentCreationData.isEditing === true ? (
+                        <>
+                            <CommentCreationTool />
+                        </>
+                    ) : null}
                 </div>
             </CommentCreationContext.Provider>
         </div>
