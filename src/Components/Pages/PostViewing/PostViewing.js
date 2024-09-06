@@ -1,9 +1,11 @@
-import { useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { ApiUrl } from "../../../config";
 import PostInfoCard from "./PostInfoCard";
 import { ErrorContext } from "../../../App";
 import PostMediaCard from "./PostMediaCard";
+
+export const CommentCreationContext = createContext();
 
 export default function PostViewing() {
     const { id } = useParams();
@@ -22,6 +24,11 @@ export default function PostViewing() {
     const [authorData, setAuthorData] = useState({
         username: "Loading...",
         profileImage: undefined,
+    });
+
+    const [commentCreationData, setCommentCreationData] = useState({
+        isEditing: false,
+        content: "",
     });
 
     useEffect(() => {
@@ -64,22 +71,26 @@ export default function PostViewing() {
 
     return (
         <div className="w-full h-full flex flex-col p-[1.5rem] bg-black">
-            <div className="flex flex-row w-full h-full">
-                <PostInfoCard
-                    title={postData.title}
-                    description={postData.description}
-                    profileImage={authorData.profileImage}
-                    username={authorData.username}
-                    dateOfCreation={postData.dateOfCreation}
-                    author={postData.author}
-                    _id={id}
-                />
-                <PostMediaCard
-                    videoID={postData.video}
-                    imageIDs={postData.images}
-                    model={postData.model}
-                />
-            </div>
+            <CommentCreationContext.Provider
+                value={[commentCreationData, setCommentCreationData]}
+            >
+                <div className="flex flex-row w-full h-full">
+                    <PostInfoCard
+                        title={postData.title}
+                        description={postData.description}
+                        profileImage={authorData.profileImage}
+                        username={authorData.username}
+                        dateOfCreation={postData.dateOfCreation}
+                        author={postData.author}
+                        _id={id}
+                    />
+                    <PostMediaCard
+                        videoID={postData.video}
+                        imageIDs={postData.images}
+                        model={postData.model}
+                    />
+                </div>
+            </CommentCreationContext.Provider>
         </div>
     );
 }
